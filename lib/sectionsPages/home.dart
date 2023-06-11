@@ -89,8 +89,8 @@ class Home extends StatelessWidget {
                               Container(
                                 height: 80,
                                 width: 300,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
+                                decoration:BoxDecoration(
+                                  gradient:const  LinearGradient(
                                     colors: [
                                       Color.fromARGB(133, 89, 147, 255),
                                       Color.fromARGB(204, 103, 11, 179),
