@@ -10,7 +10,7 @@ class ListaPedidosSrcl extends StatefulWidget {
 class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
   final ScrollController _firstController = ScrollController();
 
-   /*final btnlistOrders = <Widget> [
+  /*final btnlistOrders = <Widget> [
     const Column(
       children:[
         Row(
@@ -47,34 +47,34 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             gradient: LinearGradient(
-                              colors: [
-                                 Color.fromARGB(242, 17, 157, 221),
-                                Color.fromARGB(185, 242, 242, 243),
-                              ],
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.bottomRight
-                            ),
+                                colors: [
+                                  Color.fromARGB(242, 17, 157, 221),
+                                  Color.fromARGB(185, 242, 242, 243),
+                                ],
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.bottomRight),
                           ),
                           height: 80,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              
                               Container(
                                 margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
                                 width: 150,
                                 child: const Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    Icon(Icons.check_box,size: 40),
+                                    Icon(Icons.check_box,
+                                        size: 40, color: Color.fromARGB(255, 6, 143, 17)),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text('Entregado '),
                                         Text('Traje Marinera'),
                                       ],
                                     ),
-                                    
                                   ],
                                 ),
                               ),
@@ -82,9 +82,17 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  IconButton(onPressed: (){}, icon: const  Icon(Icons.remove_red_eye_outlined)),
-                                  IconButton(onPressed: (){}, icon: const  Icon(Icons.edit)),
-                                  IconButton(onPressed: (){}, icon: const  Icon(Icons.delete_forever_rounded)),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                          Icons.remove_red_eye_outlined)),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.edit)),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                          Icons.delete_forever_rounded)),
                                 ],
                               ),
                             ],
