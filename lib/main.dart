@@ -1,0 +1,33 @@
+import 'package:app_vestimenta/mainpages/mainappbar.dart';
+import 'package:flutter/material.dart';
+
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        //useMaterial3: true,
+      ),
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const  MainAppBar(),
+      },
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
