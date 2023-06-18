@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "378976952639",
+    "project_id": "dbfirevestimenta",
+    "storage_bucket": "dbfirevestimenta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378976952639:android:4246c765cbe0d18d74b38a",
+        "android_client_info": {
+          "package_name": "com.example.app_vestimenta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378976952639-ddvrrc7i4lqdj3r11mapmq3fhsq4fmfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB1w7xLIH6DZC0G808yn_fF8j869JFFrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378976952639-ddvrrc7i4lqdj3r11mapmq3fhsq4fmfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
