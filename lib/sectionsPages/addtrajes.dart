@@ -261,7 +261,20 @@ class AddVestments extends StatelessWidget {
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                   children: [
                                                                                     Icon(Icons.add_card_rounded,color: Colors.black),
-                                                                                    Text('Nuevos Trajes',style: TextStyle(color: Colors.black,)),
+                                                                                    Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text('Nuevas',
+                                                                                            style: TextStyle(
+                                                                                              color: Colors.black,
+                                                                                            )),
+                                                                                        Text('Vestimentas',
+                                                                                            style: TextStyle(
+                                                                                              color: Colors.black,
+                                                                                            )),
+                                                                                      ],
+                                                                                    ),
+                                                                                    
                                                                                   ],
                                                                                 ),
                                                                               ),
@@ -417,7 +430,7 @@ class AddVestments extends StatelessWidget {
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                   children: [
                                                                                     Icon(Icons.add_card,color: Colors.black),
-                                                                                    Text('Nuevos Trajes',style: TextStyle(color: Colors.black)),
+                                                                                    Text('Nuevos ',style: TextStyle(color: Colors.black)),
                                                                                   ],
                                                                                 ),
                                                                               ),
