@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_vestimenta/FormView/form_vestimentas.dart';
 
 class AddVestments extends StatelessWidget {
   const AddVestments({super.key});
@@ -86,7 +87,7 @@ class AddVestments extends StatelessWidget {
                                                         backgroundColor:
                                                             Colors.black,
                                                         onPressed: () {},
-                                                        child:const Icon(Icons
+                                                        child: const Icon(Icons
                                                             .add_circle_outline),
                                                       ),
                                                     ))
@@ -165,38 +166,59 @@ class AddVestments extends StatelessWidget {
                                     children: [
                                       Center(
                                         child: Container(
-                                          decoration:const  BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                Color.fromARGB(255, 130, 23, 156),
-                                                Color.fromARGB(248, 45, 181, 185),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(colors: [
+                                                Color.fromARGB(
+                                                    255, 130, 23, 156),
+                                                Color.fromARGB(
+                                                    248, 45, 181, 185),
                                                 Color.fromARGB(248, 201, 12, 91)
-                                              ]
-                                            ),
-                                            color: Colors.purple,
-                                            borderRadius: BorderRadius.all(Radius.circular(30))
-                                          ),
-                                          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                              ]),
+                                              color: Colors.purple,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
+                                          margin: const EdgeInsets.fromLTRB(
+                                              0, 20, 0, 0),
                                           width: 180,
                                           height: 130,
-                                          
                                           child: Stack(
                                             children: [
                                               Column(
-                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
                                                 children: [
                                                   Container(
-                                                    decoration: const BoxDecoration(
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          Color.fromARGB(255, 139, 100, 26),
-                                                          Color.fromARGB(248, 194, 182, 17),
-                                                          Color.fromARGB(248, 12, 201, 169)
-                                                        ]
-                                                      ),
-                                                      borderRadius: BorderRadius.all(Radius.circular(30))
-                                                    ),
-                                                    margin: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            gradient:
+                                                                LinearGradient(
+                                                                    colors: [
+                                                                  Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          139,
+                                                                          100,
+                                                                          26),
+                                                                  Color
+                                                                      .fromARGB(
+                                                                          248,
+                                                                          194,
+                                                                          182,
+                                                                          17),
+                                                                  Color
+                                                                      .fromARGB(
+                                                                          248,
+                                                                          12,
+                                                                          201,
+                                                                          169)
+                                                                ]),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            30))),
+                                                    margin: const EdgeInsets
+                                                        .fromLTRB(0, 8.0, 0, 0),
                                                     height: 110,
                                                     width: 180,
                                                     child: Stack(
@@ -207,25 +229,41 @@ class AddVestments extends StatelessWidget {
                                                                   .end,
                                                           children: [
                                                             Container(
-                                                              decoration: const BoxDecoration(
-                                                                gradient: LinearGradient(
-                                                                  colors: [
-                                                                    Color.fromARGB(255, 113, 148, 73),
-                                                                    Color.fromARGB(248, 123, 138, 96),
-                                                                    Color.fromARGB(248, 12, 201, 169),
-                                                                  ],
-                                                                  begin: Alignment.topCenter,
-                                                                  end: Alignment.bottomCenter
-                                                                ),
-                                                                borderRadius: BorderRadius.all(Radius.circular(30))
-                                                              ),
+                                                              decoration:
+                                                                  const BoxDecoration(
+                                                                      gradient: LinearGradient(
+                                                                          colors: [
+                                                                            Color.fromARGB(
+                                                                                255,
+                                                                                113,
+                                                                                148,
+                                                                                73),
+                                                                            Color.fromARGB(
+                                                                                248,
+                                                                                123,
+                                                                                138,
+                                                                                96),
+                                                                            Color.fromARGB(
+                                                                                248,
+                                                                                12,
+                                                                                201,
+                                                                                169),
+                                                                          ],
+                                                                          begin: Alignment
+                                                                              .topCenter,
+                                                                          end: Alignment
+                                                                              .bottomCenter),
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(30))),
                                                               height: 90,
                                                               width: 180,
                                                               child: Stack(
                                                                   children: [
                                                                     Row(
                                                                       mainAxisAlignment:
-                                                                          MainAxisAlignment.center,
+                                                                          MainAxisAlignment
+                                                                              .center,
                                                                       children: [
                                                                         Column(
                                                                           mainAxisAlignment:
@@ -236,12 +274,11 @@ class AddVestments extends StatelessWidget {
                                                                                 borderRadius: BorderRadius.all(Radius.circular(30)),
                                                                                 gradient: LinearGradient(
                                                                                   colors: [
-                                                                                     Color.fromARGB(255, 25, 152, 168),
+                                                                                    Color.fromARGB(255, 25, 152, 168),
                                                                                     Color.fromARGB(248, 156, 217, 238),
                                                                                     Color.fromARGB(101, 191, 227, 240),
                                                                                     Color.fromARGB(248, 95, 27, 139),
                                                                                   ],
-                                                                                  
                                                                                   begin: Alignment.centerLeft,
                                                                                   end: Alignment.centerRight,
                                                                                 ),
@@ -251,16 +288,20 @@ class AddVestments extends StatelessWidget {
                                                                               height: 50,
                                                                               width: 150,
                                                                               child: ElevatedButton(
-                                                                                
-                                                                                onPressed: () {},
+                                                                                onPressed: () {
+                                                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                                                    builder: (context) => const FormVestiment(),
+                                                                                  ));
+                                                                                },
                                                                                 style: ElevatedButton.styleFrom(
-                                                                                  backgroundColor: Colors.transparent,shadowColor: Colors.transparent,
+                                                                                  backgroundColor: Colors.transparent,
+                                                                                  shadowColor: Colors.transparent,
                                                                                   shape: const StadiumBorder(),
                                                                                 ),
                                                                                 child: const Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                   children: [
-                                                                                    Icon(Icons.add_card_rounded,color: Colors.black),
+                                                                                    Icon(Icons.add_card_rounded, color: Colors.black),
                                                                                     Column(
                                                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                                                       children: [
@@ -274,7 +315,6 @@ class AddVestments extends StatelessWidget {
                                                                                             )),
                                                                                       ],
                                                                                     ),
-                                                                                    
                                                                                   ],
                                                                                 ),
                                                                               ),
@@ -429,8 +469,8 @@ class AddVestments extends StatelessWidget {
                                                                                 child: const Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                   children: [
-                                                                                    Icon(Icons.add_card,color: Colors.black),
-                                                                                    Text('Nuevos ',style: TextStyle(color: Colors.black)),
+                                                                                    Icon(Icons.add_card, color: Colors.black),
+                                                                                    Text('Nuevos ', style: TextStyle(color: Colors.black)),
                                                                                   ],
                                                                                 ),
                                                                               ),
@@ -585,8 +625,11 @@ class AddVestments extends StatelessWidget {
                                                                                 child: const Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                   children: [
-                                                                                    Icon(Icons.add_card,color: Colors.black),
-                                                                                    Text('Nuevos Trajes',style: TextStyle(color: Colors.black),),
+                                                                                    Icon(Icons.add_card, color: Colors.black),
+                                                                                    Text(
+                                                                                      'Nuevos Trajes',
+                                                                                      style: TextStyle(color: Colors.black),
+                                                                                    ),
                                                                                   ],
                                                                                 ),
                                                                               ),
