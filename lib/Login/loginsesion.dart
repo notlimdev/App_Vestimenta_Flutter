@@ -28,18 +28,58 @@ class LoginSesion extends StatelessWidget {
                 children: [
                   Center(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                          child: const Text(
-                            'FOLK COSTUME',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'Ultra',
-                            ),
+                        const Text(
+                          'FOLK COSTUME',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: 'Ultra',
                           ),
                         ),
                         SvgPicture.asset('assets/images/logo_sesion.svg'),
+                        Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromARGB(197, 134, 30, 219),
+                                Color.fromARGB(198, 159, 76, 214),
+                              ]
+                            ),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight:Radius.circular(0),topLeft: Radius.circular(20),topRight: Radius.circular(50) ),
+                          ),
+                          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          width: 300,
+                          height: 300,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 15, 8, 20),
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Ingrese Su Correo',
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    border: OutlineInputBorder(
+                                    ),
+                                    labelText: 'Ingrese su contraseña',
+                                    
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
                           decoration: BoxDecoration(
                               gradient: const LinearGradient(
@@ -51,7 +91,7 @@ class LoginSesion extends StatelessWidget {
                                 end: Alignment.bottomCenter,
                               ),
                               borderRadius: BorderRadius.circular(30)),
-                          margin: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                           width: 300,
                           height: 60,
                           child: ElevatedButton(
@@ -73,39 +113,6 @@ class LoginSesion extends StatelessWidget {
                                 ],
                               )),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(75, 132, 32, 214),
-                                  Color.fromARGB(198, 141, 48, 204),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                              borderRadius: BorderRadius.circular(30)),
-                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          width: 300,
-                          height: 60,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                shape: const StadiumBorder(),
-                              ),
-                              onPressed: () {},
-                              child: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text('REGISTRATE'),
-                                  Icon(
-                                    Icons.arrow_circle_right_outlined,
-                                    size: 40,
-                                  )
-                                ],
-                              )),
-                        )
                       ],
                     ),
                   ),
