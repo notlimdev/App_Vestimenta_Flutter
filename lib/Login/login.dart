@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:app_vestimenta/Login/loginsesion.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -69,7 +70,11 @@ class Login extends StatelessWidget {
                               shadowColor: Colors.transparent,
                               shape: const StadiumBorder(),
                             ),
-                            onPressed: (){}, 
+                            onPressed: (){
+                               Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const LoginSesion(),
+                                ));
+                            }, 
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [

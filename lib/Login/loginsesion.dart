@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:app_vestimenta/mainpages/mainappbar.dart';
 
 class LoginSesion extends StatelessWidget {
   const LoginSesion({super.key});
@@ -7,6 +8,7 @@ class LoginSesion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Inicio de Sesión'),),
       body: Column(
         children: <Widget>[
           //Expancion de Fondo Gradiente
@@ -30,14 +32,21 @@ class LoginSesion extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        SvgPicture.asset('assets/images/logo_sesion.svg'),
                         const Text(
-                          'FOLK COSTUME',
+                          'INGRESA A',
                           style: TextStyle(
                             fontSize: 30,
                             fontFamily: 'Ultra',
                           ),
                         ),
-                        SvgPicture.asset('assets/images/logo_sesion.svg'),
+                        const Text(
+                          'TU SESIÓN',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: 'Ultra',
+                          ),
+                        ),
                         Container(
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
@@ -60,7 +69,10 @@ class LoginSesion extends StatelessWidget {
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     labelStyle: TextStyle(color: Colors.white),
-                                    border: OutlineInputBorder(),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
                                     labelText: 'Ingrese Su Correo',
                                   ),
                                 ),
@@ -68,10 +80,14 @@ class LoginSesion extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
                                 child: TextFormField(
+                                  obscureText: true,
                                   decoration: const InputDecoration(
                                     labelStyle: TextStyle(color: Colors.white),
-                                    border: OutlineInputBorder(
+                                    enabledBorder: OutlineInputBorder(
+                                       borderSide:
+                                          BorderSide(color: Colors.white),
                                     ),
+
                                     labelText: 'Ingrese su contraseña',
                                     
                                   ),
@@ -100,12 +116,16 @@ class LoginSesion extends StatelessWidget {
                                 shadowColor: Colors.transparent,
                                 shape: const StadiumBorder(),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const MainAppBar(),
+                                ));
+                              },
                               child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text('INICIA SESIÓN'),
+                                  Text('INICIAR'),
                                   Icon(
                                     Icons.arrow_circle_right_outlined,
                                     size: 40,

@@ -46,6 +46,9 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Configuraciones Generales'),
+      ),
       body: Column(
         children: <Widget>[
           //Expancion de Fondo Gradiente

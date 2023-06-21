@@ -12,6 +12,9 @@ class _ListOrdersState extends State<ListOrders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Listado de Trajes Y Pedidos'),
+      ),
       body: Column(
         children: <Widget>[
           //Expancion de Fondo Gradiente

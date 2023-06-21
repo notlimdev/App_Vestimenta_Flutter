@@ -59,7 +59,7 @@ class _MainAppBarState extends State<MainAppBar> {
     const Settings()
 
   ];
-  int index =3;
+  int index =2;
   @override
   Widget build(BuildContext context) {
     /*return Scaffold(
@@ -94,7 +94,6 @@ class _MainAppBarState extends State<MainAppBar> {
       );*/
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(title: const Text("End 2"),),
       /*floatingActionButton: FloatingActionButton(
         onPressed: (){},
         backgroundColor: Colors.blue,
