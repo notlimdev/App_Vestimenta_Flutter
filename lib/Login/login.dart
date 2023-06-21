@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -29,8 +30,8 @@ class Login extends StatelessWidget {
                     child: Column(
                       children: [
                          Container(
-                          margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                          child: Text(
+                          margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                          child: const Text(
                             'FOLK COSTUME',
                             style: TextStyle(fontSize: 30,
                             fontFamily: 'Ultra',
@@ -38,11 +39,76 @@ class Login extends StatelessWidget {
                           ),
                          ),
                          Container(
-                          margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Text(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30)),
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          child: const Text(
                             "Bienvenido Registrate ó Incia Sesión"
                             ),
+
                          ),
+                         SvgPicture.asset('assets/images/Icon_login.svg'),
+                         Container(
+                          decoration: BoxDecoration(
+                              gradient: const  LinearGradient(
+                                colors: [
+                                  Color.fromARGB(75, 132, 32, 214),
+                                  Color.fromARGB(198, 141, 48, 204),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              borderRadius: BorderRadius.circular(30)
+                          ),
+                          margin: const  EdgeInsets.fromLTRB(0, 80, 0, 0),
+                          width: 300,
+                          height: 60,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              shape: const StadiumBorder(),
+                            ),
+                            onPressed: (){}, 
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('INICIA SESIÓN'),
+                                Icon(Icons.arrow_circle_right_outlined,size: 40,)
+                              ],
+                            )
+                          ),
+                         ),
+                        Container(
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromARGB(75, 132, 32, 214),
+                                  Color.fromARGB(198, 141, 48, 204),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              borderRadius: BorderRadius.circular(30)
+                          ),
+                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          width: 300,
+                          height: 60,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                shape: const StadiumBorder(),
+                              ),
+                              onPressed: () {},
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('REGISTRATE'),
+                                  Icon(Icons.arrow_circle_right_outlined,size: 40,)
+                                ],
+                              )),
+                        )
                       ],
                     ),
                   ),
