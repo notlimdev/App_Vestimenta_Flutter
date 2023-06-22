@@ -1,14 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:app_vestimenta/mainpages/mainappbar.dart';
+//import 'package:app_vestimenta/mainpages/mainappbar.dart';
+import 'dart:developer' as miltex;
 
-class LoginSesion extends StatelessWidget {
+class LoginSesion extends StatefulWidget {
   const LoginSesion({super.key});
+
+  @override
+  State<LoginSesion> createState() => _LoginSesionState();
+}
+
+String validatorcorreo(value) {
+  if (value.isEmpty) {
+    return 'El campo no debe estar vacio';
+  } else {
+    if (value.contains(' ')) {
+      return 'El Email contiene espacio';
+    } else {
+      return value!;
+    }
+  }
+}
+
+String validatorpassword(value) {
+  if (value.isEmpty) {
+    return 'El campo no debe estar vacio';
+  } else {
+    if (value.length < 6) {
+      return 'La contraseña es debil';
+    } else {
+      return value!;
+    }
+  }
+}
+
+class _LoginSesionState extends State<LoginSesion> {
+  String agregarvalidator(value) {
+    email = value;
+    return email;
+  }
+
+  final  _formkey = GlobalKey<FormState>();
+
+  String emailcorrecto = "maria05@gmail.com";
+  String passwordcorrecto = "123456";
+
+  String email = '';
+  String password = '';
+
+  void registrarse() {}
+  void iniciarsesion() {
+    FormState? formState = _formkey.currentState;
+
+    if (formState!.validate()) {
+      formState.save();
+      if (emailcorrecto.toLowerCase() == email.toLowerCase() &&
+          passwordcorrecto == password) {
+        miltex.log('Este es mi email : $email');
+        miltex.log('este es mi contraseña: $password');
+      } else {
+        miltex.log('aqui hay una error');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Inicio de Sesión'),),
+      appBar: AppBar(
+        title: const Text('Inicio de Sesión'),
+      ),
       body: Column(
         children: <Widget>[
           //Expancion de Fondo Gradiente
@@ -47,91 +108,104 @@ class LoginSesion extends StatelessWidget {
                             fontFamily: 'Ultra',
                           ),
                         ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(197, 134, 30, 219),
-                                Color.fromARGB(198, 159, 76, 214),
-                              ]
-                            ),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight:Radius.circular(0),topLeft: Radius.circular(20),topRight: Radius.circular(50) ),
-                          ),
-                          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                          width: 300,
-                          height: 300,
+                        Form(
+                          key: _formkey,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 15, 8, 20),
-                                child: TextFormField(
-                                  decoration: const InputDecoration(
-                                    fillColor: Colors.white,
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Color.fromARGB(197, 134, 30, 219),
+                                    Color.fromARGB(198, 159, 76, 214),
+                                  ]),
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(50),
+                                      bottomRight: Radius.circular(0),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(50)),
+                                ),
+                                margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                width: 300,
+                                height: 300,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          8, 15, 8, 20),
+                                      child: TextFormField(
+                                        decoration: const InputDecoration(
+                                          fillColor: Colors.white,
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                          ),
+                                          labelText: 'Ingrese Su Correo',
+                                        ),
+                                        validator: (value) =>
+                                            validatorcorreo(value),
+                                        onSaved: (value) =>
+                                            agregarvalidator(value),
+                                      ),
                                     ),
-                                    labelText: 'Ingrese Su Correo',
-                                  ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          8, 30, 8, 0),
+                                      child: TextFormField(
+                                        obscureText: true,
+                                        decoration: const InputDecoration(
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                          ),
+                                          labelText: 'Ingrese su contraseña',
+                                        ),
+                                        validator: (value) =>
+                                            validatorpassword(value),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
-                                child: TextFormField(
-                                  obscureText: true,
-                                  decoration: const InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    enabledBorder: OutlineInputBorder(
-                                       borderSide:
-                                          BorderSide(color: Colors.white),
+                              Container(
+                                decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(75, 132, 32, 214),
+                                        Color.fromARGB(198, 141, 48, 204),
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
                                     ),
-
-                                    labelText: 'Ingrese su contraseña',
-                                    
-                                  ),
-                                ),
+                                    borderRadius: BorderRadius.circular(30)),
+                                margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                                width: 300,
+                                height: 60,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      shape: const StadiumBorder(),
+                                    ),
+                                    onPressed: () => iniciarsesion(),
+                                    child: const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text('INICIAR'),
+                                        Icon(
+                                          Icons.arrow_circle_right_outlined,
+                                          size: 40,
+                                        )
+                                      ],
+                                    )),
                               ),
                             ],
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(75, 132, 32, 214),
-                                  Color.fromARGB(198, 141, 48, 204),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                              borderRadius: BorderRadius.circular(30)),
-                          margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                          width: 300,
-                          height: 60,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                shape: const StadiumBorder(),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const MainAppBar(),
-                                ));
-                              },
-                              child: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text('INICIAR'),
-                                  Icon(
-                                    Icons.arrow_circle_right_outlined,
-                                    size: 40,
-                                  )
-                                ],
-                              )),
                         ),
                       ],
                     ),
