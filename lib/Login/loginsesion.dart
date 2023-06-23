@@ -91,20 +91,21 @@ class _LoginSesionState extends State<LoginSesion> {
                 children: [
                   Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+
                         SvgPicture.asset('assets/images/logo_sesion.svg'),
                         const Text(
                           'INGRESA A',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 20,
                             fontFamily: 'Ultra',
                           ),
                         ),
                         const Text(
                           'TU SESIÓN',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 25,
                             fontFamily: 'Ultra',
                           ),
                         ),
