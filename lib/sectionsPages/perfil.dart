@@ -283,7 +283,10 @@ class Profile extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(18))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/Login', (Route<dynamic> route) => false);
+                                },
                                 child: const Text('CERRAR SESIÓN'),
                               ),
                             ),

@@ -1,4 +1,5 @@
 //import 'package:app_vestimenta/mainpages/mainappbar.dart';
+import 'package:app_vestimenta/mainpages/mainappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Login/login.dart';
 
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => const  Login(),
+        "/home": (context) => const MainAppBar(),
+        "/Login": (context) => const Login(),
       },
       debugShowCheckedModeBanner: false,
     );

@@ -1,48 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-//import 'package:app_vestimenta/mainpages/mainappbar.dart';
 
 class LoginSesion extends StatefulWidget {
-  const LoginSesion({Key? key} ) : super(key:key);
+  const LoginSesion({Key? key}) : super(key: key);
 
   @override
   State<LoginSesion> createState() => _LoginSesionState();
-
-
-}
-
-String validatorcorreo(value) {
-  if (value.isEmpty) {
-    return 'El campo no debe estar vacio';
-  } else {
-    if (value.contains(' ')) {
-      return 'El Email contiene espacio';
-    } else {
-      return value!;
-    }
-  }
-}
-
-String validatorpassword(value) {
-  if (value.isEmpty) {
-    return 'El campo no debe estar vacio';
-  } else {
-    if (value.length < 6) {
-      return 'La contraseña es debil';
-    } else {
-      return value!;
-    }
-  }
 }
 
 class _LoginSesionState extends State<LoginSesion> {
-  String agregarvalidator(value) {
-    email = value;
-    return email;
-  }
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-
-final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
+  final correocontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
 
   String emailcorrecto = "maria05@gmail.com";
   String passwordcorrecto = "123456";
@@ -51,15 +21,15 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
   String password = '';
 
   void registrarse() {}
-  void iniciarsesion(){
-    if (_formkey.currentState!.validate()) {
+  void iniciarsesion() {
+    if (formkey.currentState!.validate()) {
+      email = correocontroller.text;
+      password = passwordcontroller.text;
 
-      if (emailcorrecto.toLowerCase() == email.toLowerCase() &&
-          passwordcorrecto == password) {
-        print('Este es mi email : $email');
-        print('este es mi contraseña: $password');
+      if (emailcorrecto == email && passwordcorrecto == password) {
+        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
       } else {
-        print('aqui hay una error');
+        print('Datos Erroneos');
       }
     }
   }
@@ -70,9 +40,7 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
       appBar: AppBar(
         title: const Text('Inicio de Sesión'),
       ),
-      body:
-          
-      Column(
+      body: Column(
         children: <Widget>[
           //Expancion de Fondo Gradiente
           Expanded(
@@ -93,11 +61,10 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
                 children: [
                   Center(
                     child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-
                           SvgPicture.asset('assets/images/logo_sesion.svg'),
                           const Text(
                             'INGRESA A',
@@ -114,7 +81,7 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
                             ),
                           ),
                           Form(
-                            key: _formkey,
+                            key: formkey,
                             child: Column(
                               children: [
                                 Container(
@@ -129,7 +96,8 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
                                         topLeft: Radius.circular(20),
                                         topRight: Radius.circular(50)),
                                   ),
-                                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   width: 300,
                                   height: 300,
                                   child: Column(
@@ -139,38 +107,50 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
                                         padding: const EdgeInsets.fromLTRB(
                                             8, 15, 8, 20),
                                         child: TextFormField(
+                                          controller: correocontroller,
                                           decoration: const InputDecoration(
                                             fillColor: Colors.white,
                                             labelStyle:
                                                 TextStyle(color: Colors.white),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
                                             ),
                                             labelText: 'Ingrese Su Correo',
                                           ),
-                                          validator: (value) =>
-                                              validatorcorreo(value),
-                                          onSaved: (value) =>
-                                              agregarvalidator(value),
+                                          validator: (String? value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return "Campo Requerido ";
+                                            }
+                                            return null;
+                                          },
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             8, 30, 8, 0),
                                         child: TextFormField(
+                                          controller: passwordcontroller,
                                           obscureText: true,
                                           decoration: const InputDecoration(
                                             labelStyle:
                                                 TextStyle(color: Colors.white),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
                                             ),
                                             labelText: 'Ingrese su contraseña',
                                           ),
-                                          validator: (value) =>
-                                              validatorpassword(value),
+                                          keyboardType: TextInputType.number,
+                                          validator: (String? value) {
+                                            if (value!.isEmpty) {
+                                              return "Campo vacio";
+                                            } else if (value.length < 5) {
+                                              return "contraseña muy débil";
+                                            }
+                                            return null;
+                                          },
                                         ),
                                       ),
                                     ],
@@ -187,7 +167,8 @@ final GlobalKey<FormState>  _formkey = GlobalKey<FormState>();
                                         end: Alignment.bottomCenter,
                                       ),
                                       borderRadius: BorderRadius.circular(30)),
-                                  margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 50, 0, 0),
                                   width: 300,
                                   height: 60,
                                   child: ElevatedButton(
