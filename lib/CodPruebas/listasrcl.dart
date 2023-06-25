@@ -26,6 +26,9 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
       ],
     ),
   ];*/
+
+
+  bool filledSelected = false;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -51,50 +54,46 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
                                   Color.fromARGB(242, 17, 157, 221),
                                   Color.fromARGB(185, 242, 242, 243),
                                 ],
-                                begin: Alignment.bottomLeft,
-                                end: Alignment.bottomRight),
+                                // begin: Alignment.bottomLeft,
+                                // end: Alignment.bottomRight
+                                ),
                           ),
                           height: 80,
+                          margin: const EdgeInsets.all(5),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                width: 150,
-                                child: const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Icon(Icons.check_box,
-                                        size: 40, color: Color.fromARGB(255, 6, 143, 17)),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text('Entregado '),
-                                        Text('Traje Marinera'),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Row(
+                              const Icon(Icons.check_box,
+                                  size: 30, color: Color.fromARGB(255, 6, 143, 17)),
+                              const Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.center,
                                 children: [
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                          Icons.remove_red_eye_outlined)),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(Icons.edit)),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                          Icons.delete_forever_rounded)),
+                                  Text('Entregado ',style: TextStyle(fontFamily: 'Ultra',fontSize: 10)),
+                                  Text('Traje Marinera',style: TextStyle(fontSize: 8),),
                                 ],
                               ),
+
+                              FloatingActionButton.small(
+                                elevation: 3,
+                                onPressed: (){},
+                                child: const  Icon(
+                                  Icons.remove_red_eye_outlined
+                                ),
+                              ),
+                              FloatingActionButton.small(
+                                elevation: 3,
+                                onPressed: () {},
+                                child:
+                                    const Icon(Icons.edit_document),
+                              ),
+                              FloatingActionButton.small(
+                                elevation: 3,
+                                onPressed: (){},
+                                child: const  Icon(
+                                  Icons.delete_forever_rounded
+                                ),
+                              )
                             ],
                           ),
                         ),

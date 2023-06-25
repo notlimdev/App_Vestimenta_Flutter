@@ -70,292 +70,295 @@ class _SettingsState extends State<Settings> {
               )),
               child: Stack(
                 children: [
-                  Column(
-                    children: [
-                      Center(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color.fromARGB(186, 217, 217, 217),
-                                Color.fromARGB(131, 180, 137, 250),
-                                Color.fromARGB(141, 175, 130, 253),
-                              ]),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30.0))),
-                          margin: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
-                          width: 340,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  Color.fromARGB(186, 217, 217, 217),
+                                  Color.fromARGB(131, 180, 137, 250),
+                                  Color.fromARGB(141, 175, 130, 253),
+                                ]),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            margin: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
+                            width: 340,
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Icon(Icons.settings),
+                                const Text("Configuración App"),
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  color: Colors.amber,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Column(
                             children: [
-                              const Icon(Icons.settings),
-                              const Text("Configuración General."),
                               Container(
-                                height: 30,
-                                width: 30,
-                                color: Colors.amber,
+                                margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
+                                width: 340,
+                                height: 120,
+                                //color: Colors.blueGrey,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    const Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "App",
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      color: Colors.white,
+                                      width: 340,
+                                      height: 2,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 340,
+                                          //color: Colors.blue,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              const Icon(
+                                                  Icons.remove_red_eye_outlined),
+                                              const Text(
+                                                "Tema Claro",
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                              Switch(
+                                                value: light,
+                                                overlayColor: overlayColor,
+                                                trackColor: trackColor,
+                                                thumbColor:
+                                                    const MaterialStatePropertyAll<
+                                                        Color>(Colors.black),
+                                                onChanged: (bool value) {
+                                                  // This is called when the user toggles the switch.
+                                                  setState(() {
+                                                    light = value;
+                                                  });
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 340,
+                                          //color: Colors.blue,
+                                          child:  Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Icon(Icons.mediation),
+                                              Text(
+                                                "Versión",
+                                                style: TextStyle(fontSize: 15),
+                                              ),
+                                              Text("Versión preliminar 1.0 GTDP",
+                                                  style: TextStyle(fontSize: 10)),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
+                                width: 340,
+                                height: 120,
+                                //color: Colors.blueGrey,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    const Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text("Notificaciones",
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white)),
+                                      ],
+                                    ),
+                                    Container(
+                                      color: Colors.white,
+                                      width: 340,
+                                      height: 2,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 340,
+                                          //color: Colors.blue,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              const Icon(
+                                                  Icons.notifications_active),
+                                              const Text(
+                                                "Mensajes",
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Switch(
+                                                value: messajes,
+                                                overlayColor: overlayColor,
+                                                trackColor: trackColor,
+                                                thumbColor:
+                                                    const MaterialStatePropertyAll<
+                                                        Color>(Colors.black),
+                                                onChanged: (bool value) {
+                                                  // This is called when the user toggles the switch.
+                                                  setState(() {
+                                                    messajes = value;
+                                                  });
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
+                                width: 340,
+                                height: 200,
+                                //color: Colors.blueGrey,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    const Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text("Seguridad y Privacidad",
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white)),
+                                      ],
+                                    ),
+                                    Container(
+                                      color: Colors.white,
+                                      width: 340,
+                                      height: 2,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 340,
+                                          //color: Colors.blue,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              const Icon(Icons
+                                                  .download_for_offline_sharp),
+                                              const Text(
+                                                "Descargar Datos",
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(Icons
+                                                      .arrow_forward_ios)),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 340,
+                                          //color: Colors.blue,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              const Icon(
+                                                  Icons.sensor_occupied_outlined),
+                                              const Text(
+                                                "Actividad Inicio de Session",
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(Icons
+                                                      .arrow_forward_ios)),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 340,
+                                          //color: Colors.blue,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              const Icon(
+                                                  Icons.people_alt_outlined),
+                                              const Text(
+                                                "Correos Autorizados de Sesión",
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(Icons
+                                                      .arrow_forward_ios)),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      Center(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
-                              width: 340,
-                              height: 120,
-                              //color: Colors.blueGrey,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "App",
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    color: Colors.white,
-                                    width: 340,
-                                    height: 2,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 340,
-                                        //color: Colors.blue,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Icon(
-                                                Icons.remove_red_eye_outlined),
-                                            const Text(
-                                              "Tema Claro",
-                                              style: TextStyle(fontSize: 20),
-                                            ),
-                                            Switch(
-                                              value: light,
-                                              overlayColor: overlayColor,
-                                              trackColor: trackColor,
-                                              thumbColor:
-                                                  const MaterialStatePropertyAll<
-                                                      Color>(Colors.black),
-                                              onChanged: (bool value) {
-                                                // This is called when the user toggles the switch.
-                                                setState(() {
-                                                  light = value;
-                                                });
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 340,
-                                        //color: Colors.blue,
-                                        child:  Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Icon(Icons.mediation),
-                                            Text(
-                                              "Versión",
-                                              style: TextStyle(fontSize: 20),
-                                            ),
-                                            Text("Versión preliminar 1.0 GTDP",
-                                                style: TextStyle(fontSize: 9)),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
-                              width: 340,
-                              height: 120,
-                              //color: Colors.blueGrey,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text("Notificaciones",
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white)),
-                                    ],
-                                  ),
-                                  Container(
-                                    color: Colors.white,
-                                    width: 340,
-                                    height: 2,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 340,
-                                        //color: Colors.blue,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Icon(
-                                                Icons.notifications_active),
-                                            const Text(
-                                              "Mensajes",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            Switch(
-                                              value: messajes,
-                                              overlayColor: overlayColor,
-                                              trackColor: trackColor,
-                                              thumbColor:
-                                                  const MaterialStatePropertyAll<
-                                                      Color>(Colors.black),
-                                              onChanged: (bool value) {
-                                                // This is called when the user toggles the switch.
-                                                setState(() {
-                                                  messajes = value;
-                                                });
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
-                              width: 340,
-                              height: 200,
-                              //color: Colors.blueGrey,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text("Seguridad y Privacidad",
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white)),
-                                    ],
-                                  ),
-                                  Container(
-                                    color: Colors.white,
-                                    width: 340,
-                                    height: 2,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 340,
-                                        //color: Colors.blue,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Icon(Icons
-                                                .download_for_offline_sharp),
-                                            const Text(
-                                              "Descargar Datos",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons
-                                                    .arrow_forward_ios)),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 340,
-                                        //color: Colors.blue,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Icon(
-                                                Icons.sensor_occupied_outlined),
-                                            const Text(
-                                              "Actividad Inicio de Session",
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons
-                                                    .arrow_forward_ios)),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 340,
-                                        //color: Colors.blue,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Icon(
-                                                Icons.people_alt_outlined),
-                                            const Text(
-                                              "Correos Autorizados de Sesión",
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons
-                                                    .arrow_forward_ios)),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
