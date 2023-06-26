@@ -1,54 +1,34 @@
-
-import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
+import 'package:flutter/material.dart';
 
-class FormVestiment extends StatefulWidget {
-  const FormVestiment({super.key});
+const List<String> list = <String>[
+  'Vestimenta danza',
+  'Vestimenta marinera',
+  'vestimenta caporal',
+  'vestimenta valicha'
+];
+
+class FormClientes extends StatefulWidget {
+  const FormClientes({super.key});
 
   @override
-  State<FormVestiment> createState() => _FormVestimentState();
+  State<FormClientes> createState() => _FormClientesState();
 }
 
-class _FormVestimentState extends State<FormVestiment> {
+class _FormClientesState extends State<FormClientes> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.blue;
-    }
-    return Colors.green;
-  }
 
-  List<Map> tallas = [
-    {"name": "Talla S", "isChecked": false},
-    {"name": "Talla M", "isChecked": false},
-    {"name": "Talla L", "isChecked": false}
-  ];
+  TextEditingController nombrecontroller = TextEditingController();
+  TextEditingController apellidoscontroller = TextEditingController();
+  TextEditingController dnicontroller = TextEditingController();
+  TextEditingController telefonocontroller = TextEditingController();
 
-  List<String> sexper = ['Hombre', 'Mujer'];
-
-  String selectsex = 'Hombre';
-  // cajas de texto controladores
-
-  TextEditingController nameVestimenta = TextEditingController();
-  TextEditingController tipoVestimenta = TextEditingController();
-  TextEditingController descripcionVestimenta = TextEditingController();
-  TextEditingController cantidadVestimenta = TextEditingController();
-
-  bool isCheckedL = false;
-  bool isCheckedM = false;
-  bool isCheckedS = false;
-  final datostemp = [];
-  String datostemprad = '';
+  String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Nueva vestimenta')),
+      appBar: AppBar(title: const Text('Seleciona la vestimenta')),
       body: Column(
         children: <Widget>[
           //Expancion de Fondo Gradiente
@@ -78,7 +58,7 @@ class _FormVestimentState extends State<FormVestiment> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
                               child: TextFormField(
-                                controller: nameVestimenta,
+                                controller: nombrecontroller,
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   fillColor: Colors.blue,
@@ -86,7 +66,7 @@ class _FormVestimentState extends State<FormVestiment> {
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.blue),
                                   ),
-                                  labelText: 'Nombre de la Vestimenta',
+                                  labelText: 'Nombre',
                                 ),
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
@@ -99,7 +79,7 @@ class _FormVestimentState extends State<FormVestiment> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 20, 8, 0),
                               child: TextFormField(
-                                controller: tipoVestimenta,
+                                controller: apellidoscontroller,
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   fillColor: Colors.blue,
@@ -107,7 +87,7 @@ class _FormVestimentState extends State<FormVestiment> {
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.blue),
                                   ),
-                                  labelText: 'Tipo de Vestimenta',
+                                  labelText: 'Apellidos',
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
@@ -115,115 +95,6 @@ class _FormVestimentState extends State<FormVestiment> {
                                   }
                                   return null;
                                 },
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(8, 20, 8, 20),
-                              child: Row(
-                                  children: tallas.map((elemento) {
-                                return Expanded(
-                                  child: CheckboxListTile(
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    value: elemento['isChecked'],
-                                    onChanged: (val) {
-                                      setState(() {
-                                        elemento['isChecked'] = val;
-                                        if (elemento['isChecked'] == true) {
-                                          datostemp.add(elemento['name']);
-                                        } else {
-                                          datostemp.remove(elemento['name']);
-                                          print(datostemp);
-                                        }
-                                      });
-                                    },
-                                    title: Text(
-                                      elemento['name'],
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                  ),
-                                );
-                              }).toList()),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(8, 0, 8, 10),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                color: Colors.blue,
-                              )),
-                              child: Column(
-                                  children: sexper.map((element) {
-                                return ListTile(
-                                  title: Text(element),
-                                  leading: Radio(
-                                      value: element,
-                                      groupValue: selectsex,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          selectsex = val.toString();
-                                          if (selectsex == 'Mujer') {
-                                            datostemprad = 'Mujer';
-                                            print(datostemprad);
-                                          } else if (selectsex == 'Hombre') {
-                                            datostemprad = 'Hombre';
-                                            print(datostemprad);
-                                          }
-                                        });
-                                      }),
-                                );
-                              }).toList()),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                color: Colors.blue,
-                              )),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Accesorios',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 10, 8, 10),
-                                    child: SizedBox(
-                                      height: 200,
-                                      child: TextFormField(
-                                        maxLines: null,
-                                        expands: true,
-                                        keyboardType: TextInputType.multiline,
-                                        controller: descripcionVestimenta,
-                                        decoration: const InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          fillColor: Colors.blue,
-                                          labelStyle:
-                                              TextStyle(color: Colors.blueGrey),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.blue),
-                                          ),
-                                          labelText: 'Descripcion',
-                                        ),
-                                        validator: (String? value) {
-                                          if (value!.isEmpty) {
-                                            return "Campo vacio";
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                             Container(
@@ -238,13 +109,13 @@ class _FormVestimentState extends State<FormVestiment> {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.all(10),
-                                    child: const Text('Cantidad'),
+                                    child: const Text('DNI'),
                                   ),
                                   Container(
                                     margin: const EdgeInsets.all(10),
                                     width: 200,
                                     child: TextFormField(
-                                      controller: cantidadVestimenta,
+                                      controller: dnicontroller,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         fillColor: Colors.blue,
@@ -254,7 +125,48 @@ class _FormVestimentState extends State<FormVestiment> {
                                           borderSide:
                                               BorderSide(color: Colors.blue),
                                         ),
-                                        labelText: 'Ingrese Valor',
+                                        labelText: 'Ingrese dni',
+                                      ),
+                                      validator: (String? value) {
+                                        if (value!.isEmpty) {
+                                          return "Campo vacio";
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                             Container(
+                              margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.blue,
+                              )),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    child: const Text('Teléfono'),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    width: 200,
+                                    child: TextFormField(
+                                      controller: telefonocontroller,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        fillColor: Colors.blue,
+                                        labelStyle:
+                                            TextStyle(color: Colors.blueGrey),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                        ),
+                                        labelText: 'Numero de Celular',
                                       ),
                                       validator: (String? value) {
                                         if (value!.isEmpty) {
@@ -287,18 +199,11 @@ class _FormVestimentState extends State<FormVestiment> {
                                     shape: const StadiumBorder(),
                                   ),
                                   onPressed: () async {
-                                    await addvestimentas(
-                                        nameVestimenta.text,
-                                        tipoVestimenta.text,
-                                        datostemp,
-                                        datostemprad,
-                                        descripcionVestimenta.text,
-                                        cantidadVestimenta.text).then((value) {
-
-                                          Navigator.pop(context);
-                                        });
-                                    
-                                    
+                                    await addclientes(
+                                      nombrecontroller.text,apellidoscontroller.text,dnicontroller.text,telefonocontroller.text
+                                    ).then((value) {
+                                      Navigator.pop(context);
+                                    });
                                   },
                                   child: const Row(
                                     mainAxisAlignment:

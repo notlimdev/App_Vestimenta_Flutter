@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:app_vestimenta/FormView/form_vestimentas.dart';
 
-class AddVestments extends StatelessWidget {
+class AddVestments extends StatefulWidget {
   const AddVestments({super.key});
 
+  @override
+  State<AddVestments> createState() => _AddVestmentsState();
+}
+
+class _AddVestmentsState extends State<AddVestments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +64,6 @@ class AddVestments extends StatelessWidget {
                                 ),
                                 Center(
                                   child: Container(
-                                    key: key,
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
@@ -156,7 +159,6 @@ class AddVestments extends StatelessWidget {
                         ),
                         Center(
                           child: Container(
-                            key: key,
                             margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -297,10 +299,8 @@ class AddVestments extends StatelessWidget {
                                                                                 height: 50,
                                                                                 width: 200,
                                                                                 child: ElevatedButton(
-                                                                                  onPressed: () {
-                                                                                    Navigator.of(context).push(MaterialPageRoute(
-                                                                                      builder: (context) => const FormVestiment(),
-                                                                                    ));
+                                                                                  onPressed: () async {
+                                                                                    await Navigator.pushNamed(context, '/formvestimenta');
                                                                                   },
                                                                                   style: ElevatedButton.styleFrom(
                                                                                     backgroundColor: Colors.transparent,
@@ -479,7 +479,7 @@ class AddVestments extends StatelessWidget {
                                                                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                     children: [
                                                                                       Icon(Icons.add_card, color: Colors.black),
-                                                                                      Text('Nuevos ', style: TextStyle(color: Colors.black)),
+                                                                                      Text('Pedidos', style: TextStyle(color: Colors.black)),
                                                                                     ],
                                                                                   ),
                                                                                 ),
@@ -625,7 +625,9 @@ class AddVestments extends StatelessWidget {
                                                                                 height: 50,
                                                                                 width: 200,
                                                                                 child: ElevatedButton(
-                                                                                  onPressed: () {},
+                                                                                  onPressed: () async {
+                                                                                    await Navigator.pushNamed(context, '/formclientes');
+                                                                                  },
                                                                                   style: ElevatedButton.styleFrom(
                                                                                     backgroundColor: Colors.transparent,
                                                                                     shadowColor: Colors.transparent,
@@ -636,7 +638,7 @@ class AddVestments extends StatelessWidget {
                                                                                     children: [
                                                                                       Icon(Icons.add_card, color: Colors.black),
                                                                                       Text(
-                                                                                        'Nuevos Trajes',
+                                                                                        'Clientes',
                                                                                         style: TextStyle(color: Colors.black),
                                                                                       ),
                                                                                     ],

@@ -15,8 +15,19 @@ Future<List> getVestimentas() async {
 }
 
 //Escribir (Insert)
-Future<void> insCategorias(String nombre, String descripcion) async {
-  await firestore
-      .collection("categorias")
-      .add({"nombre": nombre, "descripcion": descripcion});
+Future<void> addvestimentas(String nombre, String tipo, List tallas,String sexo, String descripcion,String cantidad) async {
+   await firestore
+      .collection("vestimenta")
+      .add({"nombre": nombre, "tipo": tipo,"tallas":tallas,"sexo":sexo,"descripcion":descripcion,"cantidad":cantidad});
 }
+Future<void> addclientes(String nombres, String apellidos, String dni,
+    String telefono) async {
+  await firestore.collection("cliente").add({
+    "nombres": nombres,
+    "apellidos": apellidos,
+    "dni": dni,
+    "telefono": telefono,
+    
+  });
+}
+
