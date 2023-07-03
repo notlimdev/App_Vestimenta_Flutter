@@ -1,4 +1,4 @@
-import 'package:app_vestimenta/Servicios/conection_firebase.dart';
+//import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
 
@@ -10,33 +10,47 @@ class FormPedidos extends StatefulWidget {
 }
 
 class _FormPedidosState extends State<FormPedidos> {
+  var _currentSelectedDate;
   void callDatePicker() async {
+    var selectedDate = await getDatePickerWidget();
     setState(() {
+      _currentSelectedDate = selectedDate;
     });
   }
 
   Future<DateTime?> getDatePickerWidget() {
     return showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2023),
-        lastDate: DateTime(2026),
-        builder: (context,child){
-          return Theme(data: ThemeData.dark(),child: const Text('calendar'));
-        },
-        );
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2026),
+      builder: (context, child) {
+        return Theme(data: ThemeData.from(colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)), child: child!);
+      },
+    );
   }
 
-  final List<String> countries = [
-    'United States',
-    'Germany',
-    'Washington',
-    'Paris',
-    'Jakarta',
-    'Australia',
-    'India',
-    'Czech Republic',
-    'Lorem Ipsum',
+  final List<String> clientes = [
+    'Juan Rebosio',
+    'Pedro Picapiedra',
+    'Luis Velez',
+    'Paris Torres',
+    'JUanita Deris',
+    'Carlos terrero',
+    'Luisa Cavero',
+    'Andres Jazz',
+    'Lorena Sanchez',
+  ];
+  final List<String> vestimentas = [
+    'Los Shapis',
+    'Marinera',
+    'Tango',
+    'Carnaval de cajamarca',
+    'Carnaval de Cusco',
+    'Saras Pillu',
+    'Festejo',
+    'Danza de las Tijeras',
+    'Huaylarsh',
   ];
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
@@ -45,6 +59,27 @@ class _FormPedidosState extends State<FormPedidos> {
   TextEditingController dnicontroller = TextEditingController();
   TextEditingController telefonocontroller = TextEditingController();
 
+   Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.green;
+  }
+
+  List<Map> tallas = [
+    {"name": "Concurso", "isChecked": false},
+    {"name": "Luces", "isChecked": false},
+    {"name": "presentación", "isChecked": false}
+  ];
+  bool isCheckedL = false;
+  bool isCheckedM = false;
+  bool isCheckedS = false;
+  final datostemp = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +126,8 @@ class _FormPedidosState extends State<FormPedidos> {
                                     margin: const EdgeInsets.all(10),
                                     width: 200,
                                     child: SearchField(
-                                      suggestions: countries
+
+                                      suggestions: clientes
                                           .map(
                                             (e) => SearchFieldListItem(
                                               e,
@@ -125,7 +161,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                 ],
                               ),
                             ),
-                            //Busqueda de Cliente
+                            //Busqueda de Vestimenta
                             Container(
                               margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
                               decoration: BoxDecoration(
@@ -136,14 +172,14 @@ class _FormPedidosState extends State<FormPedidos> {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.all(10),
-                                    child: const Text('Cliente'),
+                                    child: const Text('Vestimenta'),
                                   ),
                                   Container(
                                     margin: const EdgeInsets.all(10),
-                                    width: 280,
+                                    width: 240,
                                     child: SearchField(
-                                      hint: 'Buscar Cliente',
-                                      suggestions: countries
+                                      hint: 'Buscar Vestimenta',
+                                      suggestions: vestimentas
                                           .map(
                                             (e) => SearchFieldListItem(
                                               e,
@@ -185,58 +221,26 @@ class _FormPedidosState extends State<FormPedidos> {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.all(10),
-                                    child: const Text('Fecha Entrega'),
+                                    child: const Text('Entrega'),
                                   ),
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    width: 280,
-                                    child: ElevatedButton(onPressed: callDatePicker, child: const Text('Seleciona la Fecha'))
+                                  Column(
+                                    children: [
+                                      Container(
+                                          margin: const EdgeInsets.all(10),
+                                          width: 200,
+                                          child: ElevatedButton(
+                                              onPressed: callDatePicker,
+                                              child: const Text(
+                                                  'Seleciona la Fecha')
+                                          )
+                                      ),
+                                      Text(_currentSelectedDate.toString())
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
-                              child: TextFormField(
-                                controller: nombrecontroller,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  fillColor: Colors.blue,
-                                  labelStyle: TextStyle(color: Colors.blueGrey),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blue),
-                                  ),
-                                  labelText: 'Nombre',
-                                ),
-                                validator: (String? value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Campo Requerido ";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 20, 8, 0),
-                              child: TextFormField(
-                                controller: apellidoscontroller,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  fillColor: Colors.blue,
-                                  labelStyle: TextStyle(color: Colors.blueGrey),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blue),
-                                  ),
-                                  labelText: 'Apellidos',
-                                ),
-                                validator: (String? value) {
-                                  if (value!.isEmpty) {
-                                    return "Campo vacio";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
+                            //fecha de Decolución
                             Container(
                               margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
                               decoration: BoxDecoration(
@@ -244,39 +248,54 @@ class _FormPedidosState extends State<FormPedidos> {
                                 color: Colors.blue,
                               )),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.all(10),
-                                    child: const Text('DNI'),
+                                    child: const Text('Devolución'),
                                   ),
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    width: 200,
-                                    child: TextFormField(
-                                      controller: dnicontroller,
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        fillColor: Colors.blue,
-                                        labelStyle:
-                                            TextStyle(color: Colors.blueGrey),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.blue),
-                                        ),
-                                        labelText: 'Ingrese dni',
-                                      ),
-                                      validator: (String? value) {
-                                        if (value!.isEmpty) {
-                                          return "Campo vacio";
+                                  Column(
+                                    children: [
+                                      Container(
+                                          margin: const EdgeInsets.all(10),
+                                          width: 200,
+                                          child: ElevatedButton(
+                                              onPressed: callDatePicker,
+                                              child: const Text(
+                                                  'Seleciona la Fecha'))),
+                                      Text(_currentSelectedDate.toString())
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // tipo de Traje
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                              child: Row(
+                                  children: tallas.map((elemento) {
+                                return Expanded(
+                                  child: CheckboxListTile(
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    value: elemento['isChecked'],
+                                    onChanged: (val) {
+                                      setState(() {
+                                        elemento['isChecked'] = val;
+                                        if (elemento['isChecked'] == true) {
+                                          datostemp.add(elemento['name']);
+                                        } else {
+                                          datostemp.remove(elemento['name']);
+                                          print(datostemp);
                                         }
-                                        return null;
-                                      },
+                                      });
+                                    },
+                                    title: Text(
+                                      elemento['name'],
+                                      style: const TextStyle(fontSize: 9),
                                     ),
                                   ),
-                                ],
-                              ),
+                                );
+                              }).toList()),
                             ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
@@ -290,7 +309,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.all(10),
-                                    child: const Text('Teléfono'),
+                                    child: const Text('Cantidad'),
                                   ),
                                   Container(
                                     margin: const EdgeInsets.all(10),
@@ -306,7 +325,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                           borderSide:
                                               BorderSide(color: Colors.blue),
                                         ),
-                                        labelText: 'Numero de Celular',
+                                        labelText: 'N°',
                                       ),
                                       validator: (String? value) {
                                         if (value!.isEmpty) {
@@ -339,20 +358,13 @@ class _FormPedidosState extends State<FormPedidos> {
                                     shape: const StadiumBorder(),
                                   ),
                                   onPressed: () async {
-                                    await addclientes(
-                                            nombrecontroller.text,
-                                            apellidoscontroller.text,
-                                            dnicontroller.text,
-                                            telefonocontroller.text)
-                                        .then((value) {
-                                      Navigator.pop(context);
-                                    });
+                                    
                                   },
                                   child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text('GUARDAR',
+                                      Text('GUARDAR PEDIDO',
                                           style:
                                               TextStyle(fontFamily: 'Ultra')),
                                       Icon(
