@@ -94,7 +94,7 @@ class Home extends StatelessWidget {
                                   ),
                                   //parte medio superior  del card de Home
                                   Container(
-                                    margin: EdgeInsets.all(5),
+                                    margin: const EdgeInsets.all(5),
                                     decoration:BoxDecoration(
                                       gradient:const  LinearGradient(
                                         colors: [
@@ -187,7 +187,7 @@ class Home extends StatelessWidget {
                         child: Container(
                           key: key,
                           //color: Colors.green,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: 
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -63,79 +63,77 @@ class _AddVestmentsState extends State<AddVestments> {
                                   ],
                                 ),
                                 Center(
-                                  child: Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.elliptical(70.0, 70.0)),
-                                          ),
-                                          height: 80,
-                                          width: 80,
-                                          child: Stack(
-                                            children: [
-                                              Center(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.purple.shade700,
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.elliptical(
-                                                                40.0, 40.0)),
-                                                  ),
-                                                  height: 60,
-                                                  width: 60,
-                                                  child: Stack(
-                                                    children: [
-                                                      Center(
-                                                          child: SizedBox(
-                                                        width: 40,
-                                                        height: 40,
-                                                        child:
-                                                            FloatingActionButton(
-                                                          backgroundColor:
-                                                              Colors.black,
-                                                          onPressed: () {},
-                                                          child: const Icon(Icons
-                                                              .add_circle_outline),
-                                                        ),
-                                                      ))
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.elliptical(70.0, 70.0)),
                                         ),
-                                        SizedBox(
-                                          height: 100,
-                                          width: 150,
-                                          //color: Colors.deepOrange,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.fromLTRB(
-                                                    10.0, 10.0, 0, 0),
-                                                //color: Colors.green,
-                                                child: const Text(
-                                                  'Añade',
-                                                  style: TextStyle(fontSize: 30),
+                                        height: 80,
+                                        width: 80,
+                                        child: Stack(
+                                          children: [
+                                            Center(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.purple.shade700,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.elliptical(
+                                                              40.0, 40.0)),
+                                                ),
+                                                height: 60,
+                                                width: 60,
+                                                child: Stack(
+                                                  children: [
+                                                    Center(
+                                                        child: SizedBox(
+                                                      width: 40,
+                                                      height: 40,
+                                                      child:
+                                                          FloatingActionButton(
+                                                        backgroundColor:
+                                                            Colors.black,
+                                                        onPressed: () {},
+                                                        child: const Icon(Icons
+                                                            .add_circle_outline),
+                                                      ),
+                                                    ))
+                                                  ],
                                                 ),
                                               ),
-                                              const Text(
-                                                'Nueva Categoría',
-                                                style: TextStyle(fontSize: 15),
-                                              ),
-                                            ],
-                                          ),
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(
+                                        height: 100,
+                                        width: 150,
+                                        //color: Colors.deepOrange,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.fromLTRB(
+                                                  10.0, 10.0, 0, 0),
+                                              //color: Colors.green,
+                                              child: const Text(
+                                                'Añade',
+                                                style: TextStyle(fontSize: 30),
+                                              ),
+                                            ),
+                                            const Text(
+                                              'Nueva Categoría',
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Center(
@@ -469,7 +467,9 @@ class _AddVestmentsState extends State<AddVestments> {
                                                                                 height: 50,
                                                                                 width: 200,
                                                                                 child: ElevatedButton(
-                                                                                  onPressed: () {},
+                                                                                  onPressed: () async {
+                                                                                    await Navigator.pushNamed(context, '/formpedidos');
+                                                                                  },
                                                                                   style: ElevatedButton.styleFrom(
                                                                                     backgroundColor: Colors.transparent,
                                                                                     shadowColor: Colors.transparent,

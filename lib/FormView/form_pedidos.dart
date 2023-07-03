@@ -1,5 +1,6 @@
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter/material.dart';
+import 'package:searchfield/searchfield.dart';
 
 class FormPedidos extends StatefulWidget {
   const FormPedidos({super.key});
@@ -9,6 +10,34 @@ class FormPedidos extends StatefulWidget {
 }
 
 class _FormPedidosState extends State<FormPedidos> {
+  void callDatePicker() async {
+    setState(() {
+    });
+  }
+
+  Future<DateTime?> getDatePickerWidget() {
+    return showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2023),
+        lastDate: DateTime(2026),
+        builder: (context,child){
+          return Theme(data: ThemeData.dark(),child: const Text('calendar'));
+        },
+        );
+  }
+
+  final List<String> countries = [
+    'United States',
+    'Germany',
+    'Washington',
+    'Paris',
+    'Jakarta',
+    'Australia',
+    'India',
+    'Czech Republic',
+    'Lorem Ipsum',
+  ];
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   TextEditingController nombrecontroller = TextEditingController();
@@ -46,6 +75,126 @@ class _FormPedidosState extends State<FormPedidos> {
                         physics: const BouncingScrollPhysics(),
                         child: Column(
                           children: [
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.blue,
+                              )),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    child: const Text('Cliente'),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    width: 200,
+                                    child: SearchField(
+                                      suggestions: countries
+                                          .map(
+                                            (e) => SearchFieldListItem(
+                                              e,
+                                              item: e,
+                                              // Use child to show Custom Widgets in the suggestions
+                                              // defaults to Text widget
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    const CircleAvatar(
+                                                      backgroundImage: NetworkImage(
+                                                          "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(e),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Text("Nuevo"))
+                                ],
+                              ),
+                            ),
+                            //Busqueda de Cliente
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.blue,
+                              )),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    child: const Text('Cliente'),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    width: 280,
+                                    child: SearchField(
+                                      hint: 'Buscar Cliente',
+                                      suggestions: countries
+                                          .map(
+                                            (e) => SearchFieldListItem(
+                                              e,
+                                              item: e,
+                                              // Use child to show Custom Widgets in the suggestions
+                                              // defaults to Text widget
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    const CircleAvatar(
+                                                      backgroundImage: NetworkImage(
+                                                          "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(e),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //fecha de Entrega
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.blue,
+                              )),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    child: const Text('Fecha Entrega'),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.all(10),
+                                    width: 280,
+                                    child: ElevatedButton(onPressed: callDatePicker, child: const Text('Seleciona la Fecha'))
+                                  ),
+                                ],
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
                               child: TextFormField(

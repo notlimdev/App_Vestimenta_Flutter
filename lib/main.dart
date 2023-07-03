@@ -1,4 +1,5 @@
 import 'package:app_vestimenta/FormView/form_cliente.dart';
+import 'package:app_vestimenta/FormView/form_pedidos.dart';
 import 'package:app_vestimenta/FormView/form_vestimentas.dart';
 import 'package:app_vestimenta/mainpages/mainappbar.dart';
 import 'package:app_vestimenta/sectionsPages/addtrajes.dart';
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
         '/formvestimenta':(context) => const FormVestiment(),
         '/add':(context) => const AddVestments(),
         '/formclientes': (context) => const FormClientes(),
+        '/formpedidos': (context) => const FormPedidos(),
+       
         
       },
       debugShowCheckedModeBanner: false,
