@@ -1,6 +1,7 @@
-//import 'package:app_vestimenta/Servicios/conection_firebase.dart';
+import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FormPedidos extends StatefulWidget {
   const FormPedidos({super.key});
@@ -10,11 +11,19 @@ class FormPedidos extends StatefulWidget {
 }
 
 class _FormPedidosState extends State<FormPedidos> {
-  var _currentSelectedDate;
+  var _currentSelectedDate1;
+  var _currentSelectedDate2;
   void callDatePicker() async {
     var selectedDate = await getDatePickerWidget();
     setState(() {
-      _currentSelectedDate = selectedDate;
+      _currentSelectedDate1 = selectedDate;
+    });
+  }
+
+  void callDatePicker2() async {
+    var selectedDate = await getDatePickerWidget();
+    setState(() {
+      _currentSelectedDate2 = selectedDate;
     });
   }
 
@@ -25,7 +34,11 @@ class _FormPedidosState extends State<FormPedidos> {
       firstDate: DateTime(2023),
       lastDate: DateTime(2026),
       builder: (context, child) {
-        return Theme(data: ThemeData.from(colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)), child: child!);
+        return Theme(
+            data: ThemeData.from(
+                colorScheme:
+                    ColorScheme.fromSwatch(primarySwatch: Colors.purple)),
+            child: child!);
       },
     );
   }
@@ -53,13 +66,11 @@ class _FormPedidosState extends State<FormPedidos> {
     'Huaylarsh',
   ];
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  TextEditingController userCliente = TextEditingController();
+  TextEditingController listVestimentas = TextEditingController();
+  TextEditingController cantidadcontroller = TextEditingController();
 
-  TextEditingController nombrecontroller = TextEditingController();
-  TextEditingController apellidoscontroller = TextEditingController();
-  TextEditingController dnicontroller = TextEditingController();
-  TextEditingController telefonocontroller = TextEditingController();
-
-   Color getColor(Set<MaterialState> states) {
+  Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
       MaterialState.hovered,
@@ -76,9 +87,7 @@ class _FormPedidosState extends State<FormPedidos> {
     {"name": "Luces", "isChecked": false},
     {"name": "presentación", "isChecked": false}
   ];
-  bool isCheckedL = false;
-  bool isCheckedM = false;
-  bool isCheckedS = false;
+  bool isChecked = false;
   final datostemp = [];
   @override
   Widget build(BuildContext context) {
@@ -126,7 +135,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                     margin: const EdgeInsets.all(10),
                                     width: 200,
                                     child: SearchField(
-
+                                      controller: userCliente,
                                       suggestions: clientes
                                           .map(
                                             (e) => SearchFieldListItem(
@@ -156,7 +165,55 @@ class _FormPedidosState extends State<FormPedidos> {
                                     ),
                                   ),
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Alert(
+                                            context: context,
+                                            title: "Nuevo usuario",
+                                            content: const Column(
+                                              children: <Widget>[
+                                                TextField(
+                                                  decoration: InputDecoration(
+                                                    icon: Icon(
+                                                        Icons.account_circle),
+                                                    labelText: 'Nombre',
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                    icon: Icon(Icons.lock),
+                                                    labelText: 'Apellidos',
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                    icon: Icon(Icons.lock),
+                                                    labelText: 'DNI',
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                    icon: Icon(Icons.lock),
+                                                    labelText: 'Telefono',
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            buttons: [
+                                              DialogButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                child: const Text(
+                                                  "Guardar Cliente",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              )
+                                            ]).show();
+                                      },
                                       child: const Text("Nuevo"))
                                 ],
                               ),
@@ -178,6 +235,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                     margin: const EdgeInsets.all(10),
                                     width: 240,
                                     child: SearchField(
+                                      controller: listVestimentas,
                                       hint: 'Buscar Vestimenta',
                                       suggestions: vestimentas
                                           .map(
@@ -231,10 +289,8 @@ class _FormPedidosState extends State<FormPedidos> {
                                           child: ElevatedButton(
                                               onPressed: callDatePicker,
                                               child: const Text(
-                                                  'Seleciona la Fecha')
-                                          )
-                                      ),
-                                      Text(_currentSelectedDate.toString())
+                                                  'Seleciona la Fecha'))),
+                                      Text(_currentSelectedDate1.toString())
                                     ],
                                   ),
                                 ],
@@ -259,10 +315,10 @@ class _FormPedidosState extends State<FormPedidos> {
                                           margin: const EdgeInsets.all(10),
                                           width: 200,
                                           child: ElevatedButton(
-                                              onPressed: callDatePicker,
+                                              onPressed: callDatePicker2,
                                               child: const Text(
                                                   'Seleciona la Fecha'))),
-                                      Text(_currentSelectedDate.toString())
+                                      Text(_currentSelectedDate2.toString())
                                     ],
                                   ),
                                 ],
@@ -315,7 +371,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                     margin: const EdgeInsets.all(10),
                                     width: 200,
                                     child: TextFormField(
-                                      controller: telefonocontroller,
+                                      controller: cantidadcontroller,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         fillColor: Colors.blue,
@@ -358,7 +414,22 @@ class _FormPedidosState extends State<FormPedidos> {
                                     shape: const StadiumBorder(),
                                   ),
                                   onPressed: () async {
-                                    
+                                    // print(userCliente.text);
+                                    // print(listVestimentas.text);
+                                    // print(_currentSelectedDate1);
+                                    // print(_currentSelectedDate2);
+                                    // print(datostemp);
+                                    // print(cantidadcontroller.text);
+                                     await addpedidos(
+                                            userCliente.text,
+                                            listVestimentas.text,
+                                            _currentSelectedDate1,
+                                            _currentSelectedDate2,
+                                            datostemp,
+                                            cantidadcontroller.text)
+                                        .then((value) {
+                                      Navigator.pop(context);
+                                    });
                                   },
                                   child: const Row(
                                     mainAxisAlignment:

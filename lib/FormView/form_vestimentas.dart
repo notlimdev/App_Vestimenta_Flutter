@@ -24,15 +24,33 @@ class _FormVestimentState extends State<FormVestiment> {
     return Colors.green;
   }
 
-  List<Map> tallas = [
-    {"name": "Talla S", "isChecked": false},
-    {"name": "Talla M", "isChecked": false},
-    {"name": "Talla L", "isChecked": false}
+  List<Map> tallas2 = [
+    {"name": "S", "isChecked": false},
+    {"name": "M", "isChecked": false},
+    {"name": "L", "isChecked": false},
+    {"name": "XL", "isChecked": false},
   ];
 
-  List<String> sexper = ['Hombre', 'Mujer'];
+   List<Map> tallas1 = [
+    {"name": "6", "isChecked": false},
+    {"name": "8", "isChecked": false},
+    {"name": "10", "isChecked": false},
+    {"name": "12", "isChecked": false},
+    
+  ];
+  List<Map> prendas = [
+    {"name": "Pantalon", "isChecked": false},
+    {"name": "Camisa", "isChecked": false},
+    {"name": "Falda", "isChecked": false},
+    {"name": "Manta", "isChecked": false},
+    {"name": "Faja", "isChecked": false},
+    {"name": "Sombrero", "isChecked": false},
+    {"name": "Monteras", "isChecked": false},
+  ];
 
-  String selectsex = 'Hombre';
+  List<String> sexper = ['H', 'M'];
+
+  String selectsex = 'M';
   // cajas de texto controladores
 
   TextEditingController nameVestimenta = TextEditingController();
@@ -40,10 +58,10 @@ class _FormVestimentState extends State<FormVestiment> {
   TextEditingController descripcionVestimenta = TextEditingController();
   TextEditingController cantidadVestimenta = TextEditingController();
 
-  bool isCheckedL = false;
-  bool isCheckedM = false;
-  bool isCheckedS = false;
+  bool isChecked = false;
   final datostemp = [];
+  final datostemp2 = [];
+  final datostempprendas = [];
   String datostemprad = '';
   @override
   Widget build(BuildContext context) {
@@ -96,54 +114,83 @@ class _FormVestimentState extends State<FormVestiment> {
                                 },
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 20, 8, 0),
-                              child: TextFormField(
-                                controller: tipoVestimenta,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  fillColor: Colors.blue,
-                                  labelStyle: TextStyle(color: Colors.blueGrey),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blue),
-                                  ),
-                                  labelText: 'Tipo de Vestimenta',
-                                ),
-                                validator: (String? value) {
-                                  if (value!.isEmpty) {
-                                    return "Campo vacio";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(8, 20, 8, 20),
-                              child: Row(
-                                  children: tallas.map((elemento) {
-                                return Expanded(
-                                  child: CheckboxListTile(
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    value: elemento['isChecked'],
-                                    onChanged: (val) {
-                                      setState(() {
-                                        elemento['isChecked'] = val;
-                                        if (elemento['isChecked'] == true) {
-                                          datostemp.add(elemento['name']);
-                                        } else {
-                                          datostemp.remove(elemento['name']);
-                                          print(datostemp);
-                                        }
-                                      });
-                                    },
-                                    title: Text(
-                                      elemento['name'],
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                  ),
-                                );
-                              }).toList()),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.blue,
+                              )),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(8),
+                                    child: const Row(
+                                    children: [
+                                      Text('Tallas Pequeñas'),
+                                    ],
+                                  )),
+                                  Row(
+                                      children:tallas1.map((elemento) {  
+                                    return Expanded(
+                                      child: CheckboxListTile(
+                                        controlAffinity:
+                                        ListTileControlAffinity.trailing,
+                                        value: elemento['isChecked'],
+                                        onChanged: (val) {
+                                          setState(() {
+                                            elemento['isChecked'] = val;
+                                            if (elemento['isChecked'] == true) {
+                                              datostemp.add(elemento['name']);
+                                              print(datostemp);
+                                            } else {
+                                              datostemp.remove(elemento['name']);
+                                              print(datostemp);
+                                            }
+                                          });
+                                        },
+                                        title: Text(
+                                          elemento['name'],
+                                          style: const TextStyle(fontSize: 10),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList()),
+                                  Container(
+                                    margin: const EdgeInsets.all(8),
+                                    child: const Row(
+                                    children: [
+                                      Text('Tallas Medianas y Grandes'),
+                                    ],
+                                  )),
+                                  Row(
+                                      children: tallas2.map((elemento) {
+                                    return Expanded(
+                                      child: CheckboxListTile(
+                                        controlAffinity:
+                                            ListTileControlAffinity.platform,
+                                        value: elemento['isChecked'],
+                                        onChanged: (val) {
+                                          setState(() {
+                                            elemento['isChecked'] = val;
+                                            if (elemento['isChecked'] == true) {
+                                              datostemp2.add(elemento['name']);
+                                              print(datostemp2);
+                                            } else {
+                                              datostemp2
+                                                  .remove(elemento['name']);
+                                              print(datostemp2);
+                                            }
+                                          });
+                                        },
+                                        title: Text(
+                                          elemento['name'],
+                                          style: const TextStyle(fontSize: 10),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList())
+                                ],
+                              ),
                             ),
                             Container(
                               margin: const EdgeInsets.fromLTRB(8, 0, 8, 10),
@@ -152,27 +199,64 @@ class _FormVestimentState extends State<FormVestiment> {
                                 color: Colors.blue,
                               )),
                               child: Column(
-                                  children: sexper.map((element) {
-                                return ListTile(
-                                  title: Text(element),
-                                  leading: Radio(
-                                      value: element,
-                                      groupValue: selectsex,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          selectsex = val.toString();
-                                          if (selectsex == 'Mujer') {
-                                            datostemprad = 'Mujer';
-                                            print(datostemprad);
-                                          } else if (selectsex == 'Hombre') {
-                                            datostemprad = 'Hombre';
-                                            print(datostemprad);
-                                          }
-                                        });
-                                      }),
-                                );
-                              }).toList()),
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(5, 5, 0, 5),
+                                    child: const Row(
+                                    children: [
+                                      Text('Sexo'),
+                                    ],
+                                  )),
+                                  Row(
+                                      children: sexper.map((element) {
+                                    return Expanded(
+                                      child: ListTile(
+                                        title: Text(element),
+                                        leading: Radio(
+                                            value: element,
+                                            groupValue: selectsex,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                selectsex = val.toString();
+                                                if (selectsex == 'M') {
+                                                  datostemprad = 'M';
+                                                  print(datostemprad);
+                                                } else if (selectsex == 'H') {
+                                                  datostemprad = 'H';
+                                                  print(datostemprad);
+                                                }
+                                              });
+                                            }),
+                                      ),
+                                    );
+                                  }).toList()),
+                                ],
+                              ),
                             ),
+                            Column(
+                              children: prendas.map((elemento) {
+                                  return CheckboxListTile(
+                                    controlAffinity:
+                                        ListTileControlAffinity.platform,
+                                    value: elemento['isChecked'],
+                                    onChanged: (val) {
+                                      setState(() {
+                                        elemento['isChecked'] = val;
+                                        if (elemento['isChecked'] == true) {
+                                          datostempprendas.add(elemento['name']);
+                                          print(datostempprendas);
+                                        } else {
+                                          datostempprendas.remove(elemento['name']);
+                                          print(datostempprendas);
+                                        }
+                                      });
+                                    },
+                                    title: Text(
+                                      elemento['name'],
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  );
+                                }).toList()),
                             Container(
                               margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                               decoration: BoxDecoration(
@@ -188,7 +272,7 @@ class _FormVestimentState extends State<FormVestiment> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Accesorios',
+                                          'Otros Accesorios',
                                         ),
                                       ],
                                     ),
@@ -289,9 +373,10 @@ class _FormVestimentState extends State<FormVestiment> {
                                   onPressed: () async {
                                     await addvestimentas(
                                         nameVestimenta.text,
-                                        tipoVestimenta.text,
                                         datostemp,
+                                        datostemp2,
                                         datostemprad,
+                                        datostempprendas,
                                         descripcionVestimenta.text,
                                         cantidadVestimenta.text).then((value) {
 

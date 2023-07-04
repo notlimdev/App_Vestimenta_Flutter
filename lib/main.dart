@@ -8,6 +8,7 @@ import 'package:app_vestimenta/Login/login.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:app_vestimenta/firebase_options.dart';
+import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 
 
 void main() async{
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         // useMaterial3: true,
+      ),
+      builder: (context, child) => Stack(
+        children: [child!, DropdownAlert()],
       ),
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
       
