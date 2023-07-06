@@ -2,7 +2,13 @@ import 'package:app_vestimenta/CodPruebas/listDatapedidos.dart';
 import 'package:flutter/material.dart';
 
 import '../CodPruebas/listDatavestimentas.dart';
-import 'package:app_vestimenta/CodPruebas/appbarlist.dart';
+
+
+List<String> titles = <String>[
+  'Vestimentas',
+  'Pedidos',
+  'Clientes',
+];
 
 class Inventario extends StatefulWidget {
   const Inventario({super.key});

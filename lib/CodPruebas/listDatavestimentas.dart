@@ -13,23 +13,6 @@ class ListaDataVestimenta extends StatefulWidget {
 class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
   final ScrollController _firstController = ScrollController();
 
-  /*final btnlistOrders = <Widget> [
-    const Column(
-      children:[
-        Row(
-          children: [
-            Icon(Icons.check_box),
-            Text('Traje Danza '),
-            Text('Traje Marinera'),
-            Icon(Icons.remove_red_eye_outlined),
-            Icon(Icons.edit),
-            Icon(Icons.delete_forever_rounded)
-          ],
-        ),
-      ],
-    ),
-  ];*/
-
   bool filledSelected = false;
   @override
   Widget build(BuildContext context) {
