@@ -5,20 +5,32 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 //Base de datos
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-//Lectura (Select)
-Future<List> getVestimentas() async {
-
+Future<List> getVestEspesific() async {
   List vestimentas = [];
   try {
-    
-      CollectionReference reference = firestore.collection("vestimenta");
-      QuerySnapshot snapshot = await reference.get();
-      for (var e in snapshot.docs) {
-        vestimentas.add(e.data());
-        
-      }
-      print(vestimentas);
-      print('Datos leidos correctamente');
+    CollectionReference reference = firestore.collection("vestimenta");
+    QuerySnapshot snapshot = await reference.where("nombre",isEqualTo: 'Marinera').get();
+    for (var e in snapshot.docs) {
+      vestimentas.add(e.data());
+    }
+    print(vestimentas);
+    print('Datos leidos correctamente');
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+  return vestimentas;
+}
+
+//Lectura (Select)
+Future<List> getVestimentas() async {
+  List vestimentas = [];
+  try {
+    CollectionReference reference = firestore.collection("vestimenta");
+    QuerySnapshot snapshot = await reference.get();
+    for (var e in snapshot.docs) {
+      vestimentas.add(e.data());
+    }
+    print('Datos leidos correctamente');
   } catch (e) {
     print('Error al crear el documento: $e');
   }
@@ -60,16 +72,24 @@ Future<void> addclientes(
     print('Error al crear el documento: $e');
   }
 }
-Future<void> addpedidos(String cliente,String vestimenta, Timestamp fechaEntrega, Timestamp fechaDevolucion,List categoria,String cantidad) async {
+
+Future<void> addpedidos(
+    String cliente,
+    String vestimenta,
+    DateTime fechaEntrega,
+    DateTime fechaDevolucion,
+    List categoria,
+    String cantidad) async {
   try {
-    await firestore.collection("pedidos").add({
+    final Map<String, dynamic> pedidoData = {
       "cliente": cliente,
       "vestimenta": vestimenta,
-      "fechaEntrega": fechaEntrega,
-      "fechaDevolucion": fechaDevolucion,
+      "fechaEntrega": Timestamp.fromDate(fechaEntrega),
+      "fechaDevolucion": Timestamp.fromDate(fechaDevolucion),
       "categoria": categoria,
       "cantidad": cantidad
-    });
+    };
+    await firestore.collection("pedidos").add(pedidoData);
     AlertController.show(
         "Nuevo Pedido", "Datos Agreados Correctamente!", TypeAlert.success);
   } catch (e) {

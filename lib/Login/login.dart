@@ -105,7 +105,7 @@ class Login extends StatelessWidget {
                                 shadowColor: Colors.transparent,
                                 shape: const StadiumBorder(),
                               ),
-                              onPressed: () => getVestimentas(),
+                              onPressed: () => getVestEspesific(),
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
