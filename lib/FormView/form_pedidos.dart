@@ -11,19 +11,20 @@ class FormPedidos extends StatefulWidget {
 }
 
 class _FormPedidosState extends State<FormPedidos> {
-  var _currentSelectedDate1;
-  var _currentSelectedDate2;
+  var _currentSelectedDate1 = DateTime(2023,7,7,0);
+  var _currentSelectedDate2 = DateTime(2023, 7, 7, 0);
   void callDatePicker() async {
-    var selectedDate = await getDatePickerWidget();
+    DateTime? selectedDate = await getDatePickerWidget();
     setState(() {
-      _currentSelectedDate1 = selectedDate;
+      _currentSelectedDate1 = selectedDate!;
+
     });
   }
 
-  void callDatePicker2() async {
-    var selectedDate = await getDatePickerWidget();
+  void callDatePicker2() async { 
+    DateTime? selectedDate = await getDatePickerWidget();
     setState(() {
-      _currentSelectedDate2 = selectedDate;
+      _currentSelectedDate2 = selectedDate!;
     });
   }
 
@@ -420,7 +421,7 @@ class _FormPedidosState extends State<FormPedidos> {
                                     // print(_currentSelectedDate2);
                                     // print(datostemp);
                                     // print(cantidadcontroller.text);
-                                     await addpedidos(
+                                    await addpedidos(
                                             userCliente.text,
                                             listVestimentas.text,
                                             _currentSelectedDate1,

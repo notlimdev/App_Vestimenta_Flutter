@@ -3,14 +3,14 @@ import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 
-class ListaPedidosSrcl extends StatefulWidget {
-  const ListaPedidosSrcl({super.key});
+class ListaDataPedidos extends StatefulWidget {
+  const ListaDataPedidos({super.key});
 
   @override
-  State<ListaPedidosSrcl> createState() => _ListaPedidosSrclState();
+  State<ListaDataPedidos> createState() => _ListaDataPedidosState();
 }
 
-class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
+class _ListaDataPedidosState extends State<ListaDataPedidos> {
   final ScrollController _firstController = ScrollController();
 
   /*final btnlistOrders = <Widget> [
@@ -34,12 +34,12 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getVestimentas(),
+        future: getPedidos(),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
-            if(snapshot.hasError){
-              AlertController.show("Datos No Disponibles",
-                  "Error de Servidor!", TypeAlert.error);
+            if (snapshot.hasError) {
+              AlertController.show("Datos No Disponibles", "Error de Servidor!",
+                  TypeAlert.error);
             }
             return LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
@@ -88,7 +88,7 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
                                                   fontFamily: 'Ultra',
                                                   fontSize: 10)),
                                           Text(
-                                            snapshot.data?[index]['nombre'],
+                                            snapshot.data?[index]['vestimenta'],
                                             style: const TextStyle(fontSize: 8),
                                           ),
                                         ],
@@ -119,7 +119,7 @@ class _ListaPedidosSrclState extends State<ListaPedidosSrcl> {
                 ],
               );
             });
-          }else{
+          } else {
             return const Center(
               child: CircularProgressIndicator(),
             );

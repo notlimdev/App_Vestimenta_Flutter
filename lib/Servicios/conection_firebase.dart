@@ -36,7 +36,34 @@ Future<List> getVestimentas() async {
   }
   return vestimentas;
 }
-
+Future<List> getPedidos() async {
+  List vestimentas = [];
+  try {
+    CollectionReference reference = firestore.collection("pedidos");
+    QuerySnapshot snapshot = await reference.get();
+    for (var e in snapshot.docs) {
+      vestimentas.add(e.data());
+    }
+    print('Datos leidos correctamente');
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+  return vestimentas;
+}
+Future<List> getClientes() async {
+  List vestimentas = [];
+  try {
+    CollectionReference reference = firestore.collection("cliente");
+    QuerySnapshot snapshot = await reference.get();
+    for (var e in snapshot.docs) {
+      vestimentas.add(e.data());
+    }
+    print('Datos leidos correctamente');
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+  return vestimentas;
+}
 //Escribir (Insert)
 Future<void> addvestimentas(String nombre, List tallas2, List tallas,
     String sexo, List acesorios, String descripcion, String cantidad) async {

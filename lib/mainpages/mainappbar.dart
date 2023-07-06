@@ -1,5 +1,5 @@
 import 'package:app_vestimenta/sectionsPages/addtrajes.dart';
-import 'package:app_vestimenta/sectionsPages/listpedidos.dart';
+import 'package:app_vestimenta/sectionsPages/inventario.dart';
 import 'package:app_vestimenta/sectionsPages/perfil.dart';
 import 'package:app_vestimenta/sectionsPages/settings.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -55,7 +55,7 @@ class _MainAppBarState extends State<MainAppBar> {
     const Profile(),
     const AddVestments(),
     const Home(),
-    const ListOrders(),
+    const Inventario(),
     const Settings()
 
   ];
