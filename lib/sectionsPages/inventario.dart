@@ -1,7 +1,7 @@
-import 'package:app_vestimenta/CodPruebas/listDatapedidos.dart';
+import 'package:app_vestimenta/CodPruebas/listdatapedidos.dart';
 import 'package:flutter/material.dart';
 
-import '../CodPruebas/listDatavestimentas.dart';
+import '../CodPruebas/listdatavestimentas.dart';
 
 
 List<String> titles = <String>[
