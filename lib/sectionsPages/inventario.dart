@@ -1,3 +1,4 @@
+import 'package:app_vestimenta/CodPruebas/listdataclientes.dart';
 import 'package:app_vestimenta/CodPruebas/listdatapedidos.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +21,6 @@ class _InventarioState extends State<Inventario> {
 @override
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     const int tabsCount = 3;
     return DefaultTabController(
       initialIndex: 0,
@@ -38,15 +36,15 @@ class _InventarioState extends State<Inventario> {
           bottom: TabBar(
             tabs: <Widget>[
               Tab(
-                icon: const Icon(Icons.cloud_outlined),
+                icon: const Icon(Icons.dry_cleaning),
                 text: titles[0],
               ),
               Tab(
-                icon: const Icon(Icons.beach_access_sharp),
+                icon: const Icon(Icons.checklist_outlined),
                 text: titles[1],
               ),
               Tab(
-                icon: const Icon(Icons.brightness_5_sharp),
+                icon: const Icon(Icons.people_alt_rounded),
                 text: titles[2],
               ),
             ],
@@ -68,21 +66,12 @@ class _InventarioState extends State<Inventario> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomCenter,
                 )),
-                child: Stack(
+                child: const Stack(
                   children: [
                     TabBarView(children: [
-                      const ListaDataVestimenta(),
-                      const ListaDataPedidos(),
-                      ListView.builder(
-                        itemCount: 25,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            tileColor:
-                                index.isOdd ? oddItemColor : evenItemColor,
-                            title: Text('${titles[2]} $index'),
-                          );
-                        },
-                      ),
+                      ListaDataVestimenta(),
+                      ListaDataPedidos(),
+                      ListaDataClientes(),
                     ])
                   ],
                 ),

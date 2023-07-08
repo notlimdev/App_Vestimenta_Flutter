@@ -47,7 +47,6 @@ class MyApp extends StatelessWidget {
         '/add':(context) => const AddVestments(),
         '/formclientes': (context) => const FormClientes(),
         '/formpedidos': (context) => const FormPedidos(),
-       
         
       },
       debugShowCheckedModeBanner: false,

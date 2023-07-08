@@ -56,7 +56,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                   margin: const EdgeInsets.all(5),
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       const Icon(Icons.check_box,
                                           size: 30,

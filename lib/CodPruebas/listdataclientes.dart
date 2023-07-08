@@ -2,31 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
-class ListaDataVestimenta extends StatefulWidget {
-  const ListaDataVestimenta({super.key});
+class ListaDataClientes extends StatefulWidget {
+  const ListaDataClientes({super.key});
 
   @override
-  State<ListaDataVestimenta> createState() => _ListaDataVestimentaState();
+  State<ListaDataClientes> createState() => _ListaDataClientesState();
 }
 
-class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
+class _ListaDataClientesState extends State<ListaDataClientes> {
   final ScrollController _firstController = ScrollController();
 
-  List<dynamic> accesorios = [];
   bool filledSelected = false;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getVestEspesific(),
+        future: getClientes(),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.hasError) {
               AlertController.show("Datos No Disponibles", "Error de Servidor!",
                   TypeAlert.error);
             }
-
             return LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
               return Row(
@@ -61,80 +58,40 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      const CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            "https://cdn-icons-png.flaticon.com/512/2790/2790087.png"),
-                                      ),
+                                      const Icon(Icons.emoji_people_rounded,
+                                          size: 30,
+                                          color:
+                                              Color.fromARGB(255, 6, 143, 17)),
                                       Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(snapshot.data?[index]['nombre'],
+                                          Text(snapshot.data?[index]['nombres']+' '+
+                                                  snapshot.data?[index]
+                                                      ['apellidos'],
                                               style: const TextStyle(
                                                   fontFamily: 'Ultra',
                                                   fontSize: 10)),
-                                          Text(
-                                            snapshot.data?[index]['cantidad'] +
-                                                'Ud',
-                                            style: const TextStyle(fontSize: 8),
+                                          Row(
+                                            children: [
+                                              const Icon(Icons.phone_android,size: 10),
+                                              Text(
+                                                snapshot.data?[index]['telefono'],
+                                                style: const TextStyle(fontSize: 8),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                       FloatingActionButton.small(
                                         elevation: 3,
-                                        onPressed: () async {
-                                          accesorios = snapshot.data?[index]
-                                              ['accesorios'];
-                                          Alert(
-                                              context: context,
-                                              title:snapshot.data?[index]
-                                                  ['nombre'],
-                                              content: Column(
-                                                children: [
-                                                  const Row(
-                                                    children: [
-                                                      Icon(Icons.dry_cleaning),
-                                                      Text('Acesorios Adquiridos'),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children:
-                                                        accesorios.map((dynamic e) {
-                                                      return Column(
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              const Icon(Icons.check, color: Colors.green,),
-                                                              Text(e.toString()),
-                                                            ],
-                                                          )
-                                                        ],
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                ],
-                                              ),
-                                              buttons: [
-                                                DialogButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(context),
-                                                  child: const Text(
-                                                    "Cerrar",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20),
-                                                  ),
-                                                )
-                                              ]).show();
-                                        },
+                                        onPressed: () {},
                                         child: const Icon(
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
                                         elevation: 3,
-                                        onPressed: () {
-                                          
-                                        },
+                                        onPressed: () {},
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(

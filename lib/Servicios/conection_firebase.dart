@@ -9,9 +9,17 @@ Future<List> getVestEspesific() async {
   List vestimentas = [];
   try {
     CollectionReference reference = firestore.collection("vestimenta");
-    QuerySnapshot snapshot = await reference.where("nombre",isEqualTo: 'Marinera').get();
+    QuerySnapshot snapshot = await reference.get();
     for (var e in snapshot.docs) {
-      vestimentas.add(e.data());
+      final Map<String, dynamic> data = e.data() as Map<String, dynamic>;
+
+      final vestiment = {
+        "nombre":data["nombre"],
+        "idkey": e.id,
+        "cantidad": data["cantidad"],
+        "accesorios": data["accesorios"],
+      };
+      vestimentas.add(vestiment);
     }
     print(vestimentas);
     print('Datos leidos correctamente');
@@ -30,12 +38,14 @@ Future<List> getVestimentas() async {
     for (var e in snapshot.docs) {
       vestimentas.add(e.data());
     }
+    print(vestimentas);
     print('Datos leidos correctamente');
   } catch (e) {
     print('Error al crear el documento: $e');
   }
   return vestimentas;
 }
+
 Future<List> getPedidos() async {
   List vestimentas = [];
   try {
@@ -50,6 +60,7 @@ Future<List> getPedidos() async {
   }
   return vestimentas;
 }
+
 Future<List> getClientes() async {
   List vestimentas = [];
   try {
@@ -64,6 +75,7 @@ Future<List> getClientes() async {
   }
   return vestimentas;
 }
+
 //Escribir (Insert)
 Future<void> addvestimentas(String nombre, List tallas2, List tallas,
     String sexo, List acesorios, String descripcion, String cantidad) async {
