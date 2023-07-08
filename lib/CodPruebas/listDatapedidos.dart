@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ListaDataPedidos extends StatefulWidget {
   const ListaDataPedidos({super.key});
@@ -12,7 +13,7 @@ class ListaDataPedidos extends StatefulWidget {
 
 class _ListaDataPedidosState extends State<ListaDataPedidos> {
   final ScrollController _firstController = ScrollController();
-
+  List<dynamic> tipoves = [];
   bool filledSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -77,17 +78,136 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                         ],
                                       ),
                                       FloatingActionButton.small(
+                                        key: UniqueKey(),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          DateTime fe = snapshot.data?[index]
+                                                  ['fechaEntrega']
+                                              .toDate();
+                                          DateTime fv = snapshot.data?[index]
+                                                  ['fechaDevolucion']
+                                              .toDate();
+                                          tipoves = snapshot.data?[index]
+                                              ['categoria'];
+                                          Alert(
+                                              context: context,
+                                              title: 'Datos de pedido',
+                                              content: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      const Icon(Icons.person),
+                                                      Text(
+                                                          // ignore: prefer_interpolation_to_compose_strings
+                                                          'Cliente: ' +
+                                                              snapshot.data?[
+                                                                      index]
+                                                                  ['cliente']),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.dry_cleaning),
+                                                      Text(
+                                                          // ignore: prefer_interpolation_to_compose_strings
+                                                          'Vestimenta: ' +
+                                                              snapshot.data?[
+                                                                      index][
+                                                                  'vestimenta']),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.date_range),
+                                                      Column(
+                                                        children: [
+                                                          const Text(
+                                                              // ignore: prefer_interpolation_to_compose_strings
+                                                              'Fecha Entrega:'),
+                                                          Text(
+                                                              // ignore: prefer_interpolation_to_compose_strings
+                                                              '$fe'),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.date_range),
+                                                      Column(
+                                                        children: [
+                                                          const Text(
+                                                              // ignore: prefer_interpolation_to_compose_strings
+                                                              'Fecha Devolución:'),
+                                                          Text(
+                                                              // ignore: prefer_interpolation_to_compose_strings
+                                                              '$fv'),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  const Text('Tipo de Vestimenta:'),
+                                                  Column(
+                                                    children: tipoves
+                                                        .map((dynamic e) {
+                                                      return Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              const Icon(
+                                                                Icons.check,
+                                                                color: Colors
+                                                                    .green,
+                                                              ),
+                                                              Text(
+                                                                  e.toString()),
+                                                            ],
+                                                          )
+                                                        ],
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.date_range),
+                                                      Text(
+                                                          // ignore: prefer_interpolation_to_compose_strings
+                                                          'cantidad: ' +
+                                                              snapshot.data?[
+                                                                      index]
+                                                                  ['cantidad']),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              buttons: [
+                                                DialogButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
+                                                  child: const Text(
+                                                    "Cerrar",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20),
+                                                  ),
+                                                )
+                                              ]).show();
+                                        },
                                         child: const Icon(
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
+                                        key: UniqueKey(),
                                         elevation: 3,
                                         onPressed: () {},
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(
+                                        key: UniqueKey(),
                                         elevation: 3,
                                         onPressed: () {},
                                         child: const Icon(

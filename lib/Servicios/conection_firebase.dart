@@ -48,18 +48,29 @@ Future<List> getVestimentas() async {
 }
 
 Future<List> getPedidos() async {
-  List vestimentas = [];
+  List pedidos = [];
+  CollectionReference reference = firestore.collection("pedidos");
+  QuerySnapshot snapshot = await reference.get();
   try {
-    CollectionReference reference = firestore.collection("pedidos");
-    QuerySnapshot snapshot = await reference.get();
     for (var e in snapshot.docs) {
-      vestimentas.add(e.data());
+      final Map<String, dynamic> data = e.data() as Map<String, dynamic>;
+      final Map<String, dynamic> pedidoData = {
+        "idkey": e.id,
+        "cliente": data['cliente'],
+        "vestimenta": data['vestimenta'],
+        "fechaEntrega":  data['fechaEntrega'],
+        "fechaDevolucion": data['fechaDevolucion'],
+        "categoria": data['categoria'],
+        "cantidad": data['cantidad']
+      };
+
+      pedidos.add(pedidoData);
+      print(pedidos);
     }
-    print('Datos leidos correctamente');
   } catch (e) {
     print('Error al crear el documento: $e');
   }
-  return vestimentas;
+  return pedidos;
 }
 
 Future<List> getClientes() async {
@@ -137,8 +148,15 @@ Future<void> addpedidos(
   }
 }
 
-Future<void> updatevestimentas(String idkey,String nombre, List tallas2, List tallas,
-    String sexo, List acesorios, String descripcion, String cantidad) async {
+Future<void> updatevestimentas(
+    String idkey,
+    String nombre,
+    List tallas2,
+    List tallas,
+    String sexo,
+    List acesorios,
+    String descripcion,
+    String cantidad) async {
   try {
     //await firestore.collection("vestimenta").add({
     final Map<String, dynamic> trajeDataupdate = {
@@ -152,21 +170,21 @@ Future<void> updatevestimentas(String idkey,String nombre, List tallas2, List ta
     };
     await firestore.collection("vestimenta").doc(idkey).set(trajeDataupdate);
     //});
-    AlertController.show(
-        "Vestimenta Nueva", "Datos actualizados Correctamente!", TypeAlert.success);
+    AlertController.show("Vestimenta Nueva",
+        "Datos actualizados Correctamente!", TypeAlert.success);
   } catch (e) {
     print('Error al actualizar el documento: $e');
   }
 }
 
 Future<void> deletevestimenta(
-    String idkey,
-    ) async {
+  String idkey,
+) async {
   try {
     await firestore.collection("vestimenta").doc(idkey).delete();
     //});
-    AlertController.show("Vestimenta Nueva",
-        "Datos Eliminados Correctamente!", TypeAlert.success);
+    AlertController.show("Vestimenta Nueva", "Datos Eliminados Correctamente!",
+        TypeAlert.success);
   } catch (e) {
     print('Error al Eliminar el documento: $e');
   }
