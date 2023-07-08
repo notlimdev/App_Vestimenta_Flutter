@@ -81,6 +81,7 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                         ],
                                       ),
                                       FloatingActionButton.small(
+                                        heroTag: UniqueKey(),
                                         elevation: 3,
                                         onPressed: () async {
                                           accesorios = snapshot.data?[index]
@@ -137,26 +138,87 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
+                                        heroTag: UniqueKey(),
                                         elevation: 3,
                                         onPressed: () async {
                                           await Navigator.pushNamed(
                                               context, "/editformvestimenta",
                                               arguments: {
-                                                snapshot.data?[index]['idkey'],
-                                                snapshot.data?[index]['nombre'],
-                                                snapshot.data?[index]['tallas'],
-                                                snapshot.data?[index]['sexo'],
-                                                snapshot.data?[index]['accesorios'],
-                                                snapshot.data?[index]['cantidad'],
-                                              }).then((value) {
-                                            Navigator.pop(context);
-                                          });
+                                                "idkey": snapshot.data?[index]
+                                                    ['idkey'],
+                                                "nombre": snapshot.data?[index]
+                                                    ['nombre'],
+                                                "tallas": snapshot.data?[index]
+                                                    ['tallas'],
+                                                "sexo": snapshot.data?[index]
+                                                    ['sexo'],
+                                                "accesorios": snapshot
+                                                    .data?[index]['accesorios'],
+                                                "descripcion":
+                                                    snapshot.data?[index]
+                                                        ['descripcion'],
+                                                "cantidad": snapshot
+                                                    .data?[index]['cantidad'],
+                                              });
                                         },
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(
+                                        heroTag: UniqueKey(),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          await Alert(
+                                            context: context,
+                                            type: AlertType.warning,
+                                            title: snapshot.data?[index]
+                                                ['nombre'],
+                                            desc: "!Estas Seguro de eliminar?.",
+                                            buttons: [
+                                              DialogButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                color: const Color.fromRGBO(
+                                                    0, 179, 134, 1.0),
+                                                child: const Text(
+                                                  "No, Cancelar",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              ),
+                                              DialogButton(
+                                                onPressed: () async {
+                                                  
+                                                  await deletevestimenta(
+                                                          snapshot.data?[index]
+                                                              ['idkey'])
+                                                      .then((value) {
+                                                    Navigator.pop(context);
+                                                  });
+                                                  
+                                                  setState(() {
+                                                    
+                                                    snapshot.data
+                                                        ?.removeAt(index);
+                                                  });
+                                                },
+                                                gradient: const LinearGradient(
+                                                    colors: [
+                                                      Color.fromRGBO(
+                                                          116, 116, 191, 1.0),
+                                                      Color.fromRGBO(
+                                                          52, 138, 199, 1.0)
+                                                    ]),
+                                                child: const Text(
+                                                  "Si, Eliminar",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              )
+                                            ],
+                                          ).show();
+                                        },
                                         child: const Icon(
                                             Icons.delete_forever_rounded),
                                       )

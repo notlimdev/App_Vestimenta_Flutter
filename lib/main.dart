@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/formclientes': (context) => const FormClientes(),
         '/formpedidos': (context) => const FormPedidos(),
         '/editformvestimenta': (context) => const EditFormVestiment(),
+
       },
       debugShowCheckedModeBanner: false,
     );

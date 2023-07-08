@@ -10,6 +10,9 @@ class EditFormVestiment extends StatefulWidget {
 
 class _EditFormVestimentState extends State<EditFormVestiment> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> change = GlobalKey<FormState>();
+  final GlobalKey<FormState> otheraccesorios = GlobalKey<FormState>();
+  final GlobalKey<FormState> cantidadkey = GlobalKey<FormState>();
 
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -22,14 +25,12 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
     }
     return Colors.green;
   }
-
   List<Map> tallas2 = [
     {"name": "S", "isChecked": false},
     {"name": "M", "isChecked": false},
     {"name": "L", "isChecked": false},
     {"name": "XL", "isChecked": false},
   ];
-
   List<Map> tallas1 = [
     {"name": "6", "isChecked": false},
     {"name": "8", "isChecked": false},
@@ -45,7 +46,6 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
     {"name": "Sombrero", "isChecked": false},
     {"name": "Monteras", "isChecked": false},
   ];
-
   List<String> sexper = ['H', 'M'];
 
   String selectsex = 'M';
@@ -54,7 +54,6 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
   TextEditingController nameVestimenta = TextEditingController();
   TextEditingController descripcionVestimenta = TextEditingController();
   TextEditingController cantidadVestimenta = TextEditingController();
-
   bool isChecked = false;
   final datostemp = [];
   final datostemp2 = [];
@@ -64,10 +63,11 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    print(arguments);
     nameVestimenta.text = arguments['nombre'];
     descripcionVestimenta.text = arguments['descripcion'];
-    cantidadVestimenta.text = arguments['descripcion'];
-    
+    cantidadVestimenta.text = arguments['cantidad'];
+
     return Scaffold(
       appBar: AppBar(title: const Text('Nueva vestimenta')),
       body: Column(
@@ -263,6 +263,7 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
                               );
                             }).toList()),
                             Container(
+                              key: otheraccesorios,
                               margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                               decoration: BoxDecoration(
                                   border: Border.all(
@@ -316,6 +317,7 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
                               ),
                             ),
                             Container(
+                              key: cantidadkey,
                               margin: const EdgeInsets.fromLTRB(8, 10, 8, 10),
                               decoration: BoxDecoration(
                                   border: Border.all(
@@ -357,6 +359,7 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
                               ),
                             ),
                             Container(
+                              key: change,
                               decoration: BoxDecoration(
                                   gradient: const LinearGradient(
                                     colors: [
@@ -376,7 +379,9 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
                                     shape: const StadiumBorder(),
                                   ),
                                   onPressed: () async {
-                                    await addvestimentas(
+                                    print(arguments['idkey']);
+                                    await updatevestimentas(
+                                            arguments['idkey'],
                                             nameVestimenta.text,
                                             datostemp,
                                             datostemp2,
@@ -392,7 +397,7 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text('GUARDAR',
+                                      Text('ACTUALIZAR',
                                           style:
                                               TextStyle(fontFamily: 'Ultra')),
                                       Icon(

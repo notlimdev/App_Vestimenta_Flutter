@@ -14,7 +14,7 @@ Future<List> getVestEspesific() async {
       final Map<String, dynamic> data = e.data() as Map<String, dynamic>;
 
       final vestiment = {
-        "nombre":data["nombre"],
+        "nombre": data["nombre"],
         "idkey": e.id,
         "cantidad": data["cantidad"],
         "accesorios": data["accesorios"],
@@ -24,7 +24,6 @@ Future<List> getVestEspesific() async {
       };
       vestimentas.add(vestiment);
     }
-    print(vestimentas);
     print('Datos leidos correctamente');
   } catch (e) {
     print('Error al crear el documento: $e');
@@ -41,7 +40,6 @@ Future<List> getVestimentas() async {
     for (var e in snapshot.docs) {
       vestimentas.add(e.data());
     }
-    print(vestimentas);
     print('Datos leidos correctamente');
   } catch (e) {
     print('Error al crear el documento: $e');
@@ -136,5 +134,40 @@ Future<void> addpedidos(
         "Nuevo Pedido", "Datos Agreados Correctamente!", TypeAlert.success);
   } catch (e) {
     print('Error al crear el documento: $e');
+  }
+}
+
+Future<void> updatevestimentas(String idkey,String nombre, List tallas2, List tallas,
+    String sexo, List acesorios, String descripcion, String cantidad) async {
+  try {
+    //await firestore.collection("vestimenta").add({
+    final Map<String, dynamic> trajeDataupdate = {
+      "nombre": nombre,
+      "tallas2": tallas2,
+      "tallas": tallas,
+      "sexo": sexo,
+      "accesorios": acesorios,
+      "descripcion": descripcion,
+      "cantidad": cantidad
+    };
+    await firestore.collection("vestimenta").doc(idkey).set(trajeDataupdate);
+    //});
+    AlertController.show(
+        "Vestimenta Nueva", "Datos actualizados Correctamente!", TypeAlert.success);
+  } catch (e) {
+    print('Error al actualizar el documento: $e');
+  }
+}
+
+Future<void> deletevestimenta(
+    String idkey,
+    ) async {
+  try {
+    await firestore.collection("vestimenta").doc(idkey).delete();
+    //});
+    AlertController.show("Vestimenta Nueva",
+        "Datos Eliminados Correctamente!", TypeAlert.success);
+  } catch (e) {
+    print('Error al Eliminar el documento: $e');
   }
 }
