@@ -18,6 +18,9 @@ Future<List> getVestEspesific() async {
         "idkey": e.id,
         "cantidad": data["cantidad"],
         "accesorios": data["accesorios"],
+        "tallas": data["tallas"],
+        "descripcion": data["descripcion"],
+        "sexo": data["sexo"],
       };
       vestimentas.add(vestiment);
     }

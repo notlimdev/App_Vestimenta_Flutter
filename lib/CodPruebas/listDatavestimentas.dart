@@ -87,25 +87,31 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                               ['accesorios'];
                                           Alert(
                                               context: context,
-                                              title:snapshot.data?[index]
+                                              title: snapshot.data?[index]
                                                   ['nombre'],
                                               content: Column(
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Icon(Icons.dry_cleaning),
-                                                      Text('Acesorios Adquiridos'),
+                                                      Text(
+                                                          'Acesorios Adquiridos'),
                                                     ],
                                                   ),
                                                   Column(
-                                                    children:
-                                                        accesorios.map((dynamic e) {
+                                                    children: accesorios
+                                                        .map((dynamic e) {
                                                       return Column(
                                                         children: [
                                                           Row(
                                                             children: [
-                                                              const Icon(Icons.check, color: Colors.green,),
-                                                              Text(e.toString()),
+                                                              const Icon(
+                                                                Icons.check,
+                                                                color: Colors
+                                                                    .green,
+                                                              ),
+                                                              Text(
+                                                                  e.toString()),
                                                             ],
                                                           )
                                                         ],
@@ -132,8 +138,19 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                       ),
                                       FloatingActionButton.small(
                                         elevation: 3,
-                                        onPressed: () {
-                                          
+                                        onPressed: () async {
+                                          await Navigator.pushNamed(
+                                              context, "/editformvestimenta",
+                                              arguments: {
+                                                snapshot.data?[index]['idkey'],
+                                                snapshot.data?[index]['nombre'],
+                                                snapshot.data?[index]['tallas'],
+                                                snapshot.data?[index]['sexo'],
+                                                snapshot.data?[index]['accesorios'],
+                                                snapshot.data?[index]['cantidad'],
+                                              }).then((value) {
+                                            Navigator.pop(context);
+                                          });
                                         },
                                         child: const Icon(Icons.edit_document),
                                       ),

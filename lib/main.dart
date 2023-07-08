@@ -1,3 +1,4 @@
+import 'package:app_vestimenta/FormView/editformvestimenta.dart';
 import 'package:app_vestimenta/FormView/form_cliente.dart';
 import 'package:app_vestimenta/FormView/form_pedidos.dart';
 import 'package:app_vestimenta/FormView/form_vestimentas.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/add':(context) => const AddVestments(),
         '/formclientes': (context) => const FormClientes(),
         '/formpedidos': (context) => const FormPedidos(),
-        
+        '/editformvestimenta': (context) => const EditFormVestiment(),
       },
       debugShowCheckedModeBanner: false,
     );
