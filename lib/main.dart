@@ -1,4 +1,4 @@
-import 'package:app_vestimenta/FormView/editformvestimenta.dart';
+import 'package:app_vestimenta/FormView/editform_vestimenta.dart';
 import 'package:app_vestimenta/FormView/form_cliente.dart';
 import 'package:app_vestimenta/FormView/form_pedidos.dart';
 import 'package:app_vestimenta/FormView/form_vestimentas.dart';

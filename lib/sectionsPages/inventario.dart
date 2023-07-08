@@ -2,7 +2,7 @@ import 'package:app_vestimenta/CodPruebas/listdataclientes.dart';
 import 'package:app_vestimenta/CodPruebas/listdatapedidos.dart';
 import 'package:flutter/material.dart';
 
-import '../CodPruebas/listdatavestimentas.dart';
+import '../CodPruebas/list_data_vestimentas.dart';
 
 
 List<String> titles = <String>[
