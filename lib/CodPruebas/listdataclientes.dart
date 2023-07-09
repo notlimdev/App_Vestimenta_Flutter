@@ -90,7 +90,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                         ],
                                       ),
                                       FloatingActionButton.small(
-                                        heroTag: Text("btn1clkey"),
+                                        heroTag: const Text("btn1clkey"),
                                         elevation: 3,
                                         onPressed: () async {
                                           Alert(
@@ -183,7 +183,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
-                                        heroTag: Text("btn2clkey"),
+                                        heroTag: const Text("btn2clkey"),
                                         elevation: 3,
                                         onPressed: () async {
                                           await Navigator.pushNamed(
@@ -204,7 +204,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(
-                                        heroTag: Text("btn3clkey"),
+                                        heroTag: const Text("btn3clkey"),
                                         elevation: 3,
                                         onPressed: () async {
                                           await Alert(

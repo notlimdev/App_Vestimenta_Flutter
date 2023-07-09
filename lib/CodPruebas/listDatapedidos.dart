@@ -78,7 +78,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                         ],
                                       ),
                                       FloatingActionButton.small(
-                                        heroTag: Text('btn1'),
+                                        heroTag: const Text('btn1'),
                                         elevation: 3,
                                         onPressed: () async {
                                           DateTime fe = snapshot.data?[index]
@@ -211,7 +211,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
-                                        heroTag: Text('btn2'),
+                                        heroTag: const  Text('btn2'),
                                         elevation: 3,
                                         onPressed: () async{
                                            await Navigator.pushNamed(
@@ -237,7 +237,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(
-                                        heroTag: Text('btn3'),
+                                        heroTag: const Text('btn3'),
                                         elevation: 3,
                                         onPressed: () async{
 
