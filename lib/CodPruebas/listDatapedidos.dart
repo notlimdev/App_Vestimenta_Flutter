@@ -78,7 +78,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                         ],
                                       ),
                                       FloatingActionButton.small(
-                                        key: UniqueKey(),
+                                        heroTag: Text('btn1'),
                                         elevation: 3,
                                         onPressed: () async {
                                           DateTime fe = snapshot.data?[index]
@@ -96,25 +96,34 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const Icon(Icons.person),
-                                                      Text(
-                                                          // ignore: prefer_interpolation_to_compose_strings
-                                                          'Cliente: ' +
-                                                              snapshot.data?[
-                                                                      index]
-                                                                  ['cliente']),
+                                                      Column(
+                                                        children: [
+                                                        const Row(
+                                                          children: [
+                                                              Icon(
+                                                                  Icons.person),
+                                                             Text('Cliente: '),
+                                                          ],
+                                                        ),
+                                                        Text( snapshot.data?[ index]['cliente'])
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Icon(
-                                                          Icons.dry_cleaning),
-                                                      Text(
-                                                          // ignore: prefer_interpolation_to_compose_strings
-                                                          'Vestimenta: ' +
-                                                              snapshot.data?[
-                                                                      index][
-                                                                  'vestimenta']),
+                                                      Column(
+                                                        children: [
+                                                          const Row(
+                                                            children: [
+                                                              Icon(Icons
+                                                                  .dry_cleaning),
+                                                              Text('Vestimenta: ' ),
+                                                            ],
+                                                          ),
+                                                          Text(snapshot.data?[index]['vestimenta']),
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
                                                   Row(
@@ -201,15 +210,85 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
-                                        key: UniqueKey(),
+                                        heroTag: Text('btn2'),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async{
+                                           await Navigator.pushNamed(
+                                              context, "/editformpedido",
+                                              arguments: {
+                                                "idkey": snapshot.data?[index]
+                                                    ['idkey'],
+                                                "cliente": snapshot.data?[index]
+                                                    ['cliente'],
+                                                "vestimenta": snapshot.data?[index]
+                                                    ['vestimenta'],
+                                                "fechaEntrega": snapshot.data?[index]
+                                                    ['fechaEntrega'],
+                                                "fechaDevolucion": snapshot
+                                                    .data?[index]['fechaDevolucion'],
+                                                "categoria":
+                                                    snapshot.data?[index]
+                                                        ['categoria'],
+                                                "cantidad": snapshot
+                                                    .data?[index]['cantidad'],
+                                              });
+                                        },
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(
-                                        key: UniqueKey(),
+                                        heroTag: Text('btn3'),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async{
+
+                                          await Alert(
+                                            context: context,
+                                            type: AlertType.warning,
+                                            title: "!Pedido",
+                                            desc: "!Estas Seguro de eliminar?.",
+                                            buttons: [
+                                              DialogButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                color: const Color.fromRGBO(
+                                                    0, 179, 134, 1.0),
+                                                child: const Text(
+                                                  "No, Cancelar",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              ),
+                                              DialogButton(
+                                                onPressed: () async {
+                                                  await deletepedidos(
+                                                          snapshot.data?[index]
+                                                              ['idkey'])
+                                                      .then((value) {
+                                                    Navigator.pop(context);
+                                                  });
+
+                                                  setState(() {
+                                                    snapshot.data
+                                                        ?.removeAt(index);
+                                                  });
+                                                },
+                                                gradient: const LinearGradient(
+                                                    colors: [
+                                                      Color.fromRGBO(
+                                                          116, 116, 191, 1.0),
+                                                      Color.fromRGBO(
+                                                          52, 138, 199, 1.0)
+                                                    ]),
+                                                child: const Text(
+                                                  "Si, Eliminar",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              )
+                                            ],
+                                          ).show();
+                                        },
                                         child: const Icon(
                                             Icons.delete_forever_rounded),
                                       )
