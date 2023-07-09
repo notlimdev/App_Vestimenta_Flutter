@@ -63,7 +63,6 @@ class _EditFormVestimentState extends State<EditFormVestiment> {
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
-    print(arguments);
     nameVestimenta.text = arguments['nombre'];
     descripcionVestimenta.text = arguments['descripcion'];
     cantidadVestimenta.text = arguments['cantidad'];

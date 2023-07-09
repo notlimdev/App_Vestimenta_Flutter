@@ -104,8 +104,7 @@ class _EditFormPedidosState extends State<EditFormPedidos> {
     _currentSelectedDate1 = arguments['fechaEntrega'].toDate();
 
     _currentSelectedDate2 = arguments['fechaDevolucion'].toDate();
-
-    print(arguments);
+    
     return Scaffold(
       appBar: AppBar(title: const Text('Seleciona la vestimenta')),
       body: Column(
