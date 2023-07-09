@@ -103,7 +103,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                                               Icon(
                                                                   Icons.person),
                                                              Text('Cliente: '),
-                                                          ],
+                                                          ], 
                                                         ),
                                                         Text( snapshot.data?[ index]['cliente'])
                                                         ],
@@ -204,7 +204,8 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                                         fontSize: 20),
                                                   ),
                                                 )
-                                              ]).show();
+                                              ]
+                                          ).show();
                                         },
                                         child: const Icon(
                                             Icons.remove_red_eye_outlined),

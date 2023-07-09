@@ -58,7 +58,7 @@ Future<List> getPedidos() async {
         "idkey": e.id,
         "cliente": data['cliente'],
         "vestimenta": data['vestimenta'],
-        "fechaEntrega":  data['fechaEntrega'],
+        "fechaEntrega": data['fechaEntrega'],
         "fechaDevolucion": data['fechaDevolucion'],
         "categoria": data['categoria'],
         "cantidad": data['cantidad']
@@ -70,6 +70,29 @@ Future<List> getPedidos() async {
     print('Error al crear el documento: $e');
   }
   return pedidos;
+}
+
+Future<List> getclientesespecific() async {
+  List clientessp = [];
+  CollectionReference reference = firestore.collection("cliente");
+  QuerySnapshot snapshot = await reference.get();
+  try {
+    for (var e in snapshot.docs) {
+      final Map<String, dynamic> data = e.data() as Map<String, dynamic>;
+      final Map<String, dynamic> clienteData = {
+        "idkey": e.id,
+        "nombres": data['nombres'],
+        "apellidos": data['apellidos'],
+        "dni": data['dni'],
+        "telefono": data['telefono'],
+      };
+
+      clientessp.add(clienteData);
+    }
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+  return clientessp;
 }
 
 Future<List> getClientes() async {
@@ -182,12 +205,13 @@ Future<void> deletevestimenta(
   try {
     await firestore.collection("vestimenta").doc(idkey).delete();
     //});
-    AlertController.show("Vestimenta Eliminada", "Datos Eliminados Correctamente!",
-        TypeAlert.success);
+    AlertController.show("Vestimenta Eliminada",
+        "Datos Eliminados Correctamente!", TypeAlert.success);
   } catch (e) {
     print('Error al Eliminar el documento: $e');
   }
 }
+
 //pedidos
 Future<void> updatepedidos(
     String idkey,
@@ -199,7 +223,7 @@ Future<void> updatepedidos(
     String cantidad) async {
   try {
     //await firestore.collection("vestimenta").add({
-     final Map<String, dynamic> pedidoData = {
+    final Map<String, dynamic> pedidoData = {
       "cliente": cliente,
       "vestimenta": vestimenta,
       "fechaEntrega": Timestamp.fromDate(fechaEntrega),
@@ -222,8 +246,38 @@ Future<void> deletepedidos(
   try {
     await firestore.collection("pedidos").doc(idkey).delete();
     //});
-    AlertController.show("Pedido Eliminada",
-        "Datos Eliminados Correctamente!", TypeAlert.success);
+    AlertController.show("Pedido Eliminada", "Datos Eliminados Correctamente!",
+        TypeAlert.success);
+  } catch (e) {
+    print('Error al Eliminar el documento: $e');
+  }
+}
+
+Future<void> updateclientes(String idkey, String nombres, String apellidos,
+    String dni, String telefono) async {
+  try {
+    final Map<String, dynamic> clienteData = {
+      "nombres": nombres,
+      "apellidos": apellidos,
+      "dni": dni,
+      "telefono": telefono,
+    };
+    await firestore.collection("cliente").doc(idkey).set(clienteData);
+    AlertController.show(
+        " Cliente Actualizado", "Datos Actualizados Correctamente!", TypeAlert.success);
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+}
+
+Future<void> deletecliente(
+  String idkey,
+) async {
+  try {
+    await firestore.collection("cliente").doc(idkey).delete();
+    //});
+    AlertController.show("Cliente Eliminado", "Datos Eliminados Correctamente!",
+        TypeAlert.success);
   } catch (e) {
     print('Error al Eliminar el documento: $e');
   }

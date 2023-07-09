@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ListaDataClientes extends StatefulWidget {
   const ListaDataClientes({super.key});
@@ -17,7 +18,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getClientes(),
+        future: getclientesespecific(),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.hasError) {
@@ -66,7 +67,9 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(snapshot.data?[index]['nombres']+' '+
+                                          Text(
+                                              snapshot.data?[index]['nombres'] +
+                                                  ' ' +
                                                   snapshot.data?[index]
                                                       ['apellidos'],
                                               style: const TextStyle(
@@ -74,29 +77,186 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                                   fontSize: 10)),
                                           Row(
                                             children: [
-                                              const Icon(Icons.phone_android,size: 10),
+                                              const Icon(Icons.phone_android,
+                                                  size: 10),
                                               Text(
-                                                snapshot.data?[index]['telefono'],
-                                                style: const TextStyle(fontSize: 8),
+                                                snapshot.data?[index]
+                                                    ['telefono'],
+                                                style: const TextStyle(
+                                                    fontSize: 8),
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
                                       FloatingActionButton.small(
+                                        heroTag: Text("btn1clkey"),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          Alert(
+                                              context: context,
+                                              title: 'Datos del Cliente',
+                                              content: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          const Row(
+                                                            children: [
+                                                              Icon(Icons
+                                                                  .near_me),
+                                                              Text('Nombres: '),
+                                                            ],
+                                                          ),
+                                                          Text(snapshot
+                                                                  .data?[index]
+                                                              ['nombres'])
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          const Row(
+                                                            children: [
+                                                              Icon(Icons
+                                                                  .near_me),
+                                                              Text(
+                                                                  'Apellidos: '),
+                                                            ],
+                                                          ),
+                                                          Text(snapshot
+                                                                  .data?[index]
+                                                              ['apellidos']),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.credit_card),
+                                                      Column(
+                                                        children: [
+                                                          const Text('DNI:'),
+                                                          Text(snapshot
+                                                                  .data?[index]
+                                                              ['dni']),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons.phone_android),
+                                                      Column(
+                                                        children: [
+                                                          const Text(
+                                                              'Teléfono:'),
+                                                          Text(snapshot
+                                                                  .data?[index]
+                                                              ['telefono']),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              buttons: [
+                                                DialogButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
+                                                  child: const Text(
+                                                    "Cerrar",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20),
+                                                  ),
+                                                )
+                                              ]).show();
+                                        },
                                         child: const Icon(
                                             Icons.remove_red_eye_outlined),
                                       ),
                                       FloatingActionButton.small(
+                                        heroTag: Text("btn2clkey"),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          await Navigator.pushNamed(
+                                              context, "/editformcliente",
+                                              arguments: {
+                                                'idkey': snapshot.data?[index]
+                                                    ['idkey'],
+                                                'nombres': snapshot.data?[index]
+                                                    ['nombres'],
+                                                'apellidos': snapshot
+                                                    .data?[index]['apellidos'],
+                                                'dni': snapshot.data?[index]
+                                                    ['dni'],
+                                                'telefono': snapshot
+                                                    .data?[index]['telefono']
+                                              });
+                                        },
                                         child: const Icon(Icons.edit_document),
                                       ),
                                       FloatingActionButton.small(
+                                        heroTag: Text("btn3clkey"),
                                         elevation: 3,
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          await Alert(
+                                            context: context,
+                                            type: AlertType.warning,
+                                            title: "!Estas Seguro de eliminar a?.",
+                                            desc: snapshot.data?[index]
+                                                ['nombres'],
+                                            buttons: [
+                                              DialogButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                color: const Color.fromRGBO(
+                                                    0, 179, 134, 1.0),
+                                                child: const Text(
+                                                  "No, Cancelar",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              ),
+                                              DialogButton(
+                                                onPressed: () async {
+                                                  await deletecliente(
+                                                          snapshot.data?[index]
+                                                              ['idkey'])
+                                                      .then((value) {
+                                                    Navigator.pop(context);
+                                                  });
+
+                                                  setState(() {
+                                                    snapshot.data
+                                                        ?.removeAt(index);
+                                                  });
+                                                },
+                                                gradient: const LinearGradient(
+                                                    colors: [
+                                                      Color.fromRGBO(
+                                                          116, 116, 191, 1.0),
+                                                      Color.fromRGBO(
+                                                          52, 138, 199, 1.0)
+                                                    ]),
+                                                child: const Text(
+                                                  "Si, Eliminar",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                              )
+                                            ],
+                                          ).show();
+                                        },
                                         child: const Icon(
                                             Icons.delete_forever_rounded),
                                       )
