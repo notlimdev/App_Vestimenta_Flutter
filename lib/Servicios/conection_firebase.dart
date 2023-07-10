@@ -288,4 +288,38 @@ Future<void> deletecliente(
       List<dynamic> arreglo =await futureArreglo;
       return arreglo.length;
   }
+//sección de usuarios
 
+Future<List> getuser() async {
+  List user = [];
+  try {
+    CollectionReference reference = firestore.collection("usuario");
+    QuerySnapshot snapshot = await reference.get();
+    for (var e in snapshot.docs) {
+      final Map<String, dynamic> data = e.data() as Map<String, dynamic>;
+
+      final datauser = {
+        "Nombre": data["Nombre"],
+        "idkey": e.id,
+        "apellidos": data["apellidos"],
+        "correo": data["correo"],
+        "password": data["password"],
+        "telefono": data["telefono"],
+      };
+      user.add(datauser);
+    }
+    print('Datos leidos correctamente');
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+  return user;
+}
+Future<void> updateusercorreo(String idkey, String correo) async {
+  try {
+    await firestore.collection("usuario").doc(idkey).update({'correo':correo});
+    AlertController.show(" correo Actualizado",
+        "Datos Actualizados Correctamente!", TypeAlert.success);
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+}

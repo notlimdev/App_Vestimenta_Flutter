@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:app_vestimenta/Servicios/conection_firebase.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final GlobalKey<FormState> databuildercorreo = GlobalKey<FormState>();
+  final datauser = getuser();
+  var datacorr;
+  TextEditingController correocontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,49 +46,59 @@ class Profile extends StatelessWidget {
                       Center(
                         child: Container(
                           decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(38, 177, 87, 199),
-                                Color.fromARGB(40, 135, 75, 184),
-                                Color.fromARGB(255, 84, 13, 131),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(30.0))
-                          ),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(38, 177, 87, 199),
+                                  Color.fromARGB(40, 135, 75, 184),
+                                  Color.fromARGB(255, 84, 13, 131),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0))),
                           margin: const EdgeInsets.all(15.0),
                           width: 340,
                           height: 100,
-                          
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                            Container(
-                              key: key,
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: 150,
-                                    height: 60,
-                                    //color: Colors.green,
-                                    child:  Column(
-                                      children: [
-                                        Text('Maria, Remani',style: TextStyle(fontSize: 15),),
-                                        Text('Dueña del Negocio',style: TextStyle(fontSize: 10),)
-                                      ],
-                                    ),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      SizedBox(
+                                        width: 150,
+                                        height: 60,
+                                        //color: Colors.green,
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Maria, Remani',
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            Text(
+                                              'Dueña del Negocio',
+                                              style: TextStyle(fontSize: 10),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                              'https://png.pngtree.com/png-vector/20220531/ourlarge/pngtree-avatar-business-call-center-communication-png-image_4772913.png',
+                                            ),
+                                            foregroundColor: Color.fromARGB(
+                                                230, 200, 130, 100)),
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircleAvatar(backgroundImage: NetworkImage('https://png.pngtree.com/png-vector/20220531/ourlarge/pngtree-avatar-business-call-center-communication-png-image_4772913.png',),foregroundColor: Color.fromARGB(230, 200, 130, 100)),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ]),
+                                ),
+                              ]),
                         ),
                       ),
                       //Contenedor de Telefono y Email
@@ -94,18 +115,59 @@ class Profile extends StatelessWidget {
                               color: Colors.white,
                             ),
                             Container(
-                              key: key,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 60,
                                     width: 120,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
                                       children: [
-                                        Icon(Icons.email_outlined),
-                                        Text('Maria@gmail.com',style: TextStyle(fontSize: 10),)
+                                        const Icon(Icons.email_outlined),
+                                        Center(
+                                          child: FutureBuilder<List<dynamic>>(
+                                            key: databuildercorreo,
+                                            future: getuser(),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<List<dynamic>>
+                                                    snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              } else if (snapshot.hasError) {
+                                                return const Center(
+                                                  child: Text(
+                                                      'Error al obtener los datos'),
+                                                );
+                                              } else {
+                                                List<dynamic> datos =
+                                                    snapshot.data!;
+                                                dynamic correo =
+                                                    datos[0]['correo'];
+
+                                                // Obtener el dato en el índice 2
+                                                return Center(
+                                                  child: Text(
+                                                    '$correo',
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        // Icon(Icons.email_outlined),
+                                        // Text(
+                                        //   'Maria@gmail.com',
+                                        //   style: TextStyle(fontSize: 10),
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -114,14 +176,48 @@ class Profile extends StatelessWidget {
                                     width: 2.0,
                                     color: Colors.white,
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 60,
                                     width: 120,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
                                       children: [
-                                        Icon(Icons.call),
-                                        Text('452147846',style: TextStyle(fontSize: 10),)
+                                        const Icon(Icons.call),
+                                        Center(
+                                          child: FutureBuilder<List<dynamic>>(
+                                            future: getuser(),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<List<dynamic>>
+                                                    snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              } else if (snapshot.hasError) {
+                                                return const Center(
+                                                  child: Text(
+                                                      'Error al obtener los datos'),
+                                                );
+                                              } else {
+                                                List<dynamic> datos =
+                                                    snapshot.data!;
+                                                dynamic telefono =
+                                                    datos[0]['telefono'];
+                                                // Obtener el dato en el índice 2
+                                                return Center(
+                                                  child: Text(
+                                                    '$telefono',
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -146,25 +242,25 @@ class Profile extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color.fromARGB(255, 149, 18, 182),
-                                      Color.fromARGB(211, 204, 198, 209),
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                  ),
-                                  borderRadius: BorderRadius.all(Radius.circular(30))
-                                ),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 149, 18, 182),
+                                        Color.fromARGB(211, 204, 198, 209),
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30))),
                                 height: 50,
                                 width: 300,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
+                                      backgroundColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(18))),
-                                  onPressed: () {},
+                                  onPressed: () async {},
                                   child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -196,7 +292,70 @@ class Profile extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(18))),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Alert(
+                                        context: context,
+                                        title: "Cambiar Correo",
+                                        content: Column(
+                                          children: <Widget>[
+                                            TextFormField(
+                                              controller: correocontroller,
+                                              decoration: const InputDecoration(
+                                                icon:
+                                                    Icon(Icons.account_circle),
+                                                labelText: 'Nuevo Correo',
+                                              ),
+                                              validator: (String? value) {
+                                                if (value!.isEmpty) {
+                                                  return "Campo vacio";
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        buttons: [
+                                          DialogButton(
+                                            color: Colors.red,
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: const Text(
+                                              "Cancelar",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                          DialogButton(
+                                            color: Colors.green[700],
+                                            onPressed: () async {
+                                              dynamic datos = getuser();
+                                              Future<dynamic> leerDatos(
+                                                  Future<dynamic>
+                                                      futuro) async {
+                                                dynamic resultado =
+                                                    await futuro;
+                                                return resultado;
+                                              }
+
+                                              leerDatos(datos).then((ds) async {
+                                                await updateusercorreo(
+                                                        ds[0]['idkey'],
+                                                        correocontroller.text)
+                                                    .then((value) {
+                                                  Navigator.pop(context);
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              "Actualizar",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          )
+                                        ]).show();
+                                  },
                                   child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -228,7 +387,51 @@ class Profile extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(18))),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Alert(
+                                        context: context,
+                                        title: "Cambiar telefono",
+                                        content: Column(
+                                          children: <Widget>[
+                                            TextFormField(
+                                              decoration: const InputDecoration(
+                                                icon:
+                                                    Icon(Icons.account_circle),
+                                                labelText: 'Nuevo Telefono',
+                                              ),
+                                              validator: (String? value) {
+                                                if (value!.isEmpty) {
+                                                  return "Campo vacio";
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        buttons: [
+                                          DialogButton(
+                                            color: Colors.red,
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: const Text(
+                                              "Cancelar",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                          DialogButton(
+                                            color: Colors.green[700],
+                                            onPressed: () {},
+                                            child: const Text(
+                                              "Actualizar",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          )
+                                        ]).show();
+                                  },
                                   child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -260,7 +463,51 @@ class Profile extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(18))),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Alert(
+                                        context: context,
+                                        title: "Cambiar Contraseña",
+                                        content: Column(
+                                          children: <Widget>[
+                                            TextFormField(
+                                              decoration: const InputDecoration(
+                                                icon:
+                                                    Icon(Icons.account_circle),
+                                                labelText: 'Nueva Contraseña',
+                                              ),
+                                              validator: (String? value) {
+                                                if (value!.isEmpty) {
+                                                  return "Campo vacio";
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        buttons: [
+                                          DialogButton(
+                                            color: Colors.red,
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: const Text(
+                                              "Cancelar",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                          DialogButton(
+                                            color: Colors.green[700],
+                                            onPressed: () {},
+                                            child: const Text(
+                                              "Actualizar",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          )
+                                        ]).show();
+                                  },
                                   child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -282,8 +529,9 @@ class Profile extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(18))),
                                   onPressed: () {
-                                    Navigator.of(context).pushNamedAndRemoveUntil(
-                                        '/Login', (Route<dynamic> route) => false);
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil('/Login',
+                                            (Route<dynamic> route) => false);
                                   },
                                   child: const Text('CERRAR SESIÓN'),
                                 ),
