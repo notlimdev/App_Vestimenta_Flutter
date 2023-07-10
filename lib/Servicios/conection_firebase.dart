@@ -282,3 +282,10 @@ Future<void> deletecliente(
     print('Error al Eliminar el documento: $e');
   }
 }
+
+  Future<int> contarElementosFuture(
+    Future<List<dynamic>>futureArreglo) async { 
+      List<dynamic> arreglo =await futureArreglo;
+      return arreglo.length;
+  }
+
