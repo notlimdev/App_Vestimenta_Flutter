@@ -323,3 +323,26 @@ Future<void> updateusercorreo(String idkey, String correo) async {
     print('Error al crear el documento: $e');
   }
 }
+
+Future<void> updateusertelefono(String idkey, String telefono) async {
+  try {
+    await firestore.collection("usuario").doc(idkey).update({'telefono': telefono});
+    AlertController.show(" telefono Actualizado",
+        "Datos Actualizados Correctamente!", TypeAlert.success);
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+}
+
+Future<void> updateuserpassword(String idkey, String password) async {
+  try {
+    await firestore
+        .collection("usuario")
+        .doc(idkey)
+        .update({'password': password});
+    AlertController.show(" contraseña Actualizada",
+        "Datos Actualizados Correctamente!", TypeAlert.success);
+  } catch (e) {
+    print('Error al crear el documento: $e');
+  }
+}

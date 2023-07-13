@@ -12,8 +12,10 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final GlobalKey<FormState> databuildercorreo = GlobalKey<FormState>();
   final datauser = getuser();
-  var datacorr;
+  
   TextEditingController correocontroller = TextEditingController();
+  TextEditingController telefonocontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,6 +347,9 @@ class _ProfileState extends State<Profile> {
                                                     .then((value) {
                                                   Navigator.pop(context);
                                                 });
+                                                setState(() {
+                                                  correocontroller;
+                                                });
                                               });
                                             },
                                             child: const Text(
@@ -394,6 +399,7 @@ class _ProfileState extends State<Profile> {
                                         content: Column(
                                           children: <Widget>[
                                             TextFormField(
+                                              controller: telefonocontroller,
                                               decoration: const InputDecoration(
                                                 icon:
                                                     Icon(Icons.account_circle),
@@ -422,7 +428,28 @@ class _ProfileState extends State<Profile> {
                                           ),
                                           DialogButton(
                                             color: Colors.green[700],
-                                            onPressed: () {},
+                                            onPressed: () async {
+                                               dynamic datos = getuser();
+                                              Future<dynamic> leerDatos(
+                                                  Future<dynamic>
+                                                      futuro) async {
+                                                dynamic resultado =
+                                                    await futuro;
+                                                return resultado;
+                                              }
+
+                                              leerDatos(datos).then((ds) async {
+                                                await updateusertelefono(
+                                                        ds[0]['idkey'],
+                                                        telefonocontroller.text)
+                                                    .then((value) {
+                                                  Navigator.pop(context);
+                                                });
+                                                setState(() {
+                                                  telefonocontroller;
+                                                });
+                                              });
+                                            },
                                             child: const Text(
                                               "Actualizar",
                                               style: TextStyle(
@@ -470,6 +497,7 @@ class _ProfileState extends State<Profile> {
                                         content: Column(
                                           children: <Widget>[
                                             TextFormField(
+                                              controller: passwordcontroller,
                                               decoration: const InputDecoration(
                                                 icon:
                                                     Icon(Icons.account_circle),
@@ -498,7 +526,32 @@ class _ProfileState extends State<Profile> {
                                           ),
                                           DialogButton(
                                             color: Colors.green[700],
-                                            onPressed: () {},
+                                            onPressed: () async {
+                                               dynamic datos = getuser();
+                                              Future<dynamic> leerDatos(
+                                                  Future<dynamic>
+                                                      futuro) async {
+                                                dynamic resultado =
+                                                    await futuro;
+                                                return resultado;
+                                              }
+
+                                              leerDatos(datos).then((ds) async {
+                                                await updateuserpassword(
+                                                        ds[0]['idkey'],
+                                                        passwordcontroller.text)
+                                                    .then((value) {
+                                                  Navigator.pop(context);
+                                                });
+                                                // ignore: use_build_context_synchronously
+                                                Navigator.of(context)
+                                                    .pushNamedAndRemoveUntil(
+                                                        '/Login',
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false);
+                                              });
+                                            },
                                             child: const Text(
                                               "Actualizar",
                                               style: TextStyle(

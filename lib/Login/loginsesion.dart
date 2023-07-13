@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 
 class LoginSesion extends StatefulWidget {
   const LoginSesion({Key? key}) : super(key: key);
@@ -20,14 +21,30 @@ class _LoginSesionState extends State<LoginSesion> {
   String email = '';
   String password = '';
 
+  Future<dynamic> datapassword() async {
+    dynamic datos = getuser();
+    Future<dynamic> leerDatos(Future<dynamic> futuro) async {
+      dynamic resultado = await futuro;
+      return resultado;
+    }
+
+    leerDatos(datos).then((ds) async {
+      print(ds);
+    });
+    
+  }
+
   void registrarse() {}
   void iniciarsesion() {
+    dynamic passwordfirebase = datapassword();
+    print(passwordfirebase);
     if (formkey.currentState!.validate()) {
       email = correocontroller.text;
       password = passwordcontroller.text;
 
-      if (emailcorrecto == email && passwordcorrecto == password) {
-        Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+      if (emailcorrecto == email && passwordfirebase == password) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
       } else {
         print('Datos Erroneos');
       }
@@ -177,7 +194,9 @@ class _LoginSesionState extends State<LoginSesion> {
                                         shadowColor: Colors.transparent,
                                         shape: const StadiumBorder(),
                                       ),
-                                      onPressed: () => iniciarsesion(),
+                                      onPressed: () async {
+                                        iniciarsesion();
+                                      },
                                       child: const Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
