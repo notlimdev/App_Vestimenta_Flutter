@@ -36,13 +36,13 @@ class _LoginSesionState extends State<LoginSesion> {
 
   void registrarse() {}
   void iniciarsesion() {
-    dynamic passwordfirebase = datapassword();
-    print(passwordfirebase);
+    // dynamic passwordfirebase = datapassword();
+    // print(passwordfirebase);
     if (formkey.currentState!.validate()) {
       email = correocontroller.text;
       password = passwordcontroller.text;
 
-      if (emailcorrecto == email && passwordfirebase == password) {
+      if (emailcorrecto == email && passwordcorrecto == password) {
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
       } else {
