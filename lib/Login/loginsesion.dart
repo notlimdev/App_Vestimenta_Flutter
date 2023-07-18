@@ -15,39 +15,30 @@ class _LoginSesionState extends State<LoginSesion> {
   final correocontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
 
-  String emailcorrecto = "maria05@gmail.com";
-  String passwordcorrecto = "123456";
-
   String email = '';
   String password = '';
 
-  Future<dynamic> datapassword() async {
-    dynamic datos = getuser();
-    Future<dynamic> leerDatos(Future<dynamic> futuro) async {
-      dynamic resultado = await futuro;
-      return resultado;
-    }
-
-    leerDatos(datos).then((ds) async {
-      print(ds);
-    });
-    
+  dynamic datos = getuser();
+  Future<dynamic> leerDatos(Future<dynamic> futuro) async {
+    dynamic resultado = await futuro;
+    return resultado;
   }
 
   void registrarse() {}
   void iniciarsesion() {
     // dynamic passwordfirebase = datapassword();
     // print(passwordfirebase);
+    email = correocontroller.text;
+    password = passwordcontroller.text;
     if (formkey.currentState!.validate()) {
-      email = correocontroller.text;
-      password = passwordcontroller.text;
-
-      if (emailcorrecto == email && passwordcorrecto == password) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-      } else {
-        print('Datos Erroneos');
-      }
+      leerDatos(datos).then((ds) async {
+        if (ds[0]['correo'] == email && ds[0]['password'] == password) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              '/home', (Route<dynamic> route) => false);
+        } else {
+          print('Datos Erroneos');
+        }
+      });
     }
   }
 
