@@ -4,8 +4,12 @@ import 'package:app_vestimenta/FormView/editform_vestimenta.dart';
 import 'package:app_vestimenta/FormView/form_cliente.dart';
 import 'package:app_vestimenta/FormView/form_pedidos.dart';
 import 'package:app_vestimenta/FormView/form_vestimentas.dart';
+import 'package:app_vestimenta/Upload/imageperfilupload.dart';
 import 'package:app_vestimenta/mainpages/mainappbar.dart';
 import 'package:app_vestimenta/sectionsPages/addtrajes.dart';
+import 'package:app_vestimenta/sectionsPages/perfil.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Login/login.dart';
 
@@ -53,6 +57,8 @@ class MyApp extends StatelessWidget {
         '/editformvestimenta': (context) => const EditFormVestiment(),
         '/editformpedido': (context) => const EditFormPedidos(),
         '/editformcliente': (context) => const EditFormClientes(),
+        '/uploadimgperfil': (context) => const ImagePerfilUpload(),
+        '/pageperfil': (context) => const Profile(),
 
       },
       debugShowCheckedModeBanner: false,

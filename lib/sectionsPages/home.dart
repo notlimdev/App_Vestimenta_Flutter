@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
 
@@ -49,9 +50,9 @@ class _HomeState extends State<Home> {
                             gradient: LinearGradient(
                                 colors: [
                                   Color.fromARGB(133, 89, 147, 255),
-                                  Color.fromARGB(177, 182, 127, 228),
-                                  Color.fromARGB(150, 181, 113, 226),
-                                  Color.fromARGB(124, 169, 79, 221),
+                                  Color.fromARGB(197, 183, 127, 228),
+                                  Color.fromARGB(178, 181, 113, 226),
+                                  Color.fromARGB(171, 169, 79, 221),
                                 ],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter),
@@ -89,12 +90,20 @@ class _HomeState extends State<Home> {
                                                   fontSize: 30),
                                             ),
                                             Text(
-                                              'Benvenido a tu panel Administrativo.',
+                                              'Benvenido a',
+                                            ),
+                                            Text(
+                                              ' Tu panel Administrativo.',
                                             ),
                                           ],
                                         ),
                                         Container(
-                                          child: const Text('dms'),
+                                          height: 90,
+                                          width: 90,
+                                          padding: const EdgeInsets.all(5),
+                                          child: CircleAvatar(
+                                            child: SvgPicture.asset('assets/images/prevperfil.svg'),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -177,25 +186,21 @@ class _HomeState extends State<Home> {
                                                   lineWidth: 20.0,
                                                   percent: 0.8,
                                                   // Diseño texto del Progress Bar
-                                                  center: Container(
-                                                    child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Center(
-                                                            child: Container(
-                                                              child: Text(
-                                                                '$porcentaje%',
-                                                                style:
-                                                                    const TextStyle(
-                                                                        fontSize:
-                                                                            30),
-                                                              ),
-                                                            ),
+                                                  center: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Center(
+                                                          child: Text(
+                                                            '$porcentaje%',
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        20),
                                                           ),
-                                                        ]),
-                                                  ),
+                                                        ),
+                                                      ]),
                                                   progressColor:
                                                       const Color.fromARGB(
                                                           183, 181, 7, 204),

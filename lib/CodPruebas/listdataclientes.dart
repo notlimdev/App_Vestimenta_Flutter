@@ -68,10 +68,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                              snapshot.data?[index]['nombres'] +
-                                                  ' ' +
-                                                  snapshot.data?[index]
-                                                      ['apellidos'],
+                                              snapshot.data?[index]['nombres'],
                                               style: const TextStyle(
                                                   fontFamily: 'Ultra',
                                                   fontSize: 10)),
@@ -223,7 +220,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                                   "No, Cancelar",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 20),
+                                                      fontSize: 15),
                                                 ),
                                               ),
                                               DialogButton(
@@ -251,7 +248,7 @@ class _ListaDataClientesState extends State<ListaDataClientes> {
                                                   "Si, Eliminar",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 20),
+                                                      fontSize: 15),
                                                 ),
                                               )
                                             ],

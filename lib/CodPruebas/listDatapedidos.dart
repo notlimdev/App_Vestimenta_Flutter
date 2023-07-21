@@ -256,7 +256,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                                   "No, Cancelar",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 20),
+                                                      fontSize: 15),
                                                 ),
                                               ),
                                               DialogButton(
@@ -284,7 +284,7 @@ class _ListaDataPedidosState extends State<ListaDataPedidos> {
                                                   "Si, Eliminar",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 20),
+                                                      fontSize: 15),
                                                 ),
                                               )
                                             ],

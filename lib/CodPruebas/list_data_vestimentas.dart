@@ -183,7 +183,7 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                                   "No, Cancelar",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 20),
+                                                      fontSize: 15),
                                                 ),
                                               ),
                                               DialogButton(
@@ -213,7 +213,7 @@ class _ListaDataVestimentaState extends State<ListaDataVestimenta> {
                                                   "Si, Eliminar",
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 20),
+                                                      fontSize: 15),
                                                 ),
                                               )
                                             ],

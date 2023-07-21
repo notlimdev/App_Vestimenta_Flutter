@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_vestimenta/Servicios/conection_firebase.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Profile extends StatefulWidget {
@@ -12,7 +13,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final GlobalKey<FormState> databuildercorreo = GlobalKey<FormState>();
   final datauser = getuser();
-  
+
   TextEditingController correocontroller = TextEditingController();
   TextEditingController telefonocontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
@@ -65,40 +66,36 @@ class _ProfileState extends State<Profile> {
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      SizedBox(
-                                        width: 150,
-                                        height: 60,
-                                        //color: Colors.green,
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Maria, Remani',
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Text(
-                                              'Dueña del Negocio',
-                                              style: TextStyle(fontSize: 10),
-                                            )
-                                          ],
-                                        ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    const SizedBox(
+                                      width: 150,
+                                      height: 60,
+                                      //color: Colors.green,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Maria, Remani',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          Text(
+                                            'Dueña del Negocio',
+                                            style: TextStyle(fontSize: 10),
+                                          )
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                              'https://png.pngtree.com/png-vector/20220531/ourlarge/pngtree-avatar-business-call-center-communication-png-image_4772913.png',
-                                            ),
-                                            foregroundColor: Color.fromARGB(
-                                                230, 200, 130, 100)),
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircleAvatar(
+                                          foregroundColor: const  Color.fromARGB(
+                                              230, 200, 130, 100),
+                                          child: SvgPicture.asset('assets/images/prevperfil.svg')),
+                                    )
+                                  ],
                                 ),
                               ]),
                         ),
@@ -116,115 +113,113 @@ class _ProfileState extends State<Profile> {
                               width: 300,
                               color: Colors.white,
                             ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    height: 60,
-                                    width: 120,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        const Icon(Icons.email_outlined),
-                                        Center(
-                                          child: FutureBuilder<List<dynamic>>(
-                                            key: databuildercorreo,
-                                            future: getuser(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot<List<dynamic>>
-                                                    snapshot) {
-                                              if (snapshot.connectionState ==
-                                                  ConnectionState.waiting) {
-                                                return const Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                );
-                                              } else if (snapshot.hasError) {
-                                                return const Center(
-                                                  child: Text(
-                                                      'Error al obtener los datos'),
-                                                );
-                                              } else {
-                                                List<dynamic> datos =
-                                                    snapshot.data!;
-                                                dynamic correo =
-                                                    datos[0]['correo'];
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  height: 60,
+                                  width: 120,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      const Icon(Icons.email_outlined),
+                                      Center(
+                                        child: FutureBuilder<List<dynamic>>(
+                                          key: databuildercorreo,
+                                          future: getuser(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<List<dynamic>>
+                                                  snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return const Center(
+                                                child: Text(
+                                                    'Error al obtener los datos'),
+                                              );
+                                            } else {
+                                              List<dynamic> datos =
+                                                  snapshot.data!;
+                                              dynamic correo =
+                                                  datos[0]['correo'];
 
-                                                // Obtener el dato en el índice 2
-                                                return Center(
-                                                  child: Text(
-                                                    '$correo',
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
+                                              // Obtener el dato en el índice 2
+                                              return Center(
+                                                child: Text(
+                                                  '$correo',
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                              );
+                                            }
+                                          },
                                         ),
-                                        // Icon(Icons.email_outlined),
-                                        // Text(
-                                        //   'Maria@gmail.com',
-                                        //   style: TextStyle(fontSize: 10),
-                                        // )
-                                      ],
-                                    ),
+                                      ),
+                                      // Icon(Icons.email_outlined),
+                                      // Text(
+                                      //   'Maria@gmail.com',
+                                      //   style: TextStyle(fontSize: 10),
+                                      // )
+                                    ],
                                   ),
-                                  Container(
-                                    height: 100,
-                                    width: 2.0,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    height: 60,
-                                    width: 120,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        const Icon(Icons.call),
-                                        Center(
-                                          child: FutureBuilder<List<dynamic>>(
-                                            future: getuser(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot<List<dynamic>>
-                                                    snapshot) {
-                                              if (snapshot.connectionState ==
-                                                  ConnectionState.waiting) {
-                                                return const Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                );
-                                              } else if (snapshot.hasError) {
-                                                return const Center(
-                                                  child: Text(
-                                                      'Error al obtener los datos'),
-                                                );
-                                              } else {
-                                                List<dynamic> datos =
-                                                    snapshot.data!;
-                                                dynamic telefono =
-                                                    datos[0]['telefono'];
-                                                // Obtener el dato en el índice 2
-                                                return Center(
-                                                  child: Text(
-                                                    '$telefono',
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
+                                ),
+                                Container(
+                                  height: 100,
+                                  width: 2.0,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                  width: 120,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      const Icon(Icons.call),
+                                      Center(
+                                        child: FutureBuilder<List<dynamic>>(
+                                          future: getuser(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<List<dynamic>>
+                                                  snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return const Center(
+                                                child: Text(
+                                                    'Error al obtener los datos'),
+                                              );
+                                            } else {
+                                              List<dynamic> datos =
+                                                  snapshot.data!;
+                                              dynamic telefono =
+                                                  datos[0]['telefono'];
+                                              // Obtener el dato en el índice 2
+                                              return Center(
+                                                child: Text(
+                                                  '$telefono',
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                              );
+                                            }
+                                          },
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                             Container(
                               height: 2.0,
@@ -262,7 +257,10 @@ class _ProfileState extends State<Profile> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(18))),
-                                  onPressed: () async {},
+                                  onPressed: () async {
+                                    await Navigator.pushNamed(
+                                        context, "/uploadimgperfil");
+                                  },
                                   child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -429,7 +427,7 @@ class _ProfileState extends State<Profile> {
                                           DialogButton(
                                             color: Colors.green[700],
                                             onPressed: () async {
-                                               dynamic datos = getuser();
+                                              dynamic datos = getuser();
                                               Future<dynamic> leerDatos(
                                                   Future<dynamic>
                                                       futuro) async {
@@ -527,7 +525,7 @@ class _ProfileState extends State<Profile> {
                                           DialogButton(
                                             color: Colors.green[700],
                                             onPressed: () async {
-                                               dynamic datos = getuser();
+                                              dynamic datos = getuser();
                                               Future<dynamic> leerDatos(
                                                   Future<dynamic>
                                                       futuro) async {
